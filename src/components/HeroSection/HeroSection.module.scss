@@ -1,11 +1,11 @@
 @import "src/styles/abstracts/variables";
 
 .heroSection {
-  min-height: 100vh;
-background-color: white;
+  min-height: 80vh;
+  background-color: white;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   animation: fadeIn 1.5s ease-in-out;
 
   .filter {
@@ -17,9 +17,6 @@ background-color: white;
     width: fit-content;
 
     .imageContainer {
-      width: 500px;
-      height: 300px;
-      overflow: hidden;
       display: flex;
       align-items: center;
     }
