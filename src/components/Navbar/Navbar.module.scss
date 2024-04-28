@@ -1,0 +1,56 @@
+@import "src/styles/abstracts/variables";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  width: 100%;
+
+  .navLeft {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .navItems {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+
+  .btnContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .loginBtn {
+      width: 100px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: $primary-color;
+      color: $white;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $white;
+        color: $primary-color;
+        border: 1px solid $primary-color;
+      }
+    }
+
+    .signupBtn {
+      width: 100px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ const HeroSection: React.FC = () => {
     <section className={styles.heroSection}>
       <div className={styles.filter}>
         <div className={styles.imageContainer}>
-          <Image src={heroImage} alt="Hero Image" width={500} height={500} />
+          <Image src={heroImage} alt="Hero Image"/>
         </div>
         <div className={styles.tagline}>
           <p>Elevate</p>
