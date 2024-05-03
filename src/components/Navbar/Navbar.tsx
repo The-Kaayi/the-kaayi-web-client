@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { APP_NAME } from "@/utils/constants";
+import Image from "next/image";
+import appLogo from "../../../public/app-logo.svg";
 import styles from "./Navbar.module.scss";
 
 const navItems = [
@@ -21,7 +22,7 @@ const Navbar: React.FC = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navLeft}>
-        <p className={styles.logo}>{APP_NAME}</p>
+        <Image className={styles.logo} src={appLogo} alt="App Logo" />
         <div className={styles.navItems}>
           {navItems.map((item) => (
             <Link href={item.link} key={item.name}>
