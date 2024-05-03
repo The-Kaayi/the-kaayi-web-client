@@ -19,14 +19,11 @@
     .imageContainer {
       display: flex;
       align-items: center;
-    }
 
-    .tagline {
-      font-size: $font-size-3;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 250px;
+      .heroImage {
+        width: 400px;
+        height: 300px;
+      }
     }
 
     .title {

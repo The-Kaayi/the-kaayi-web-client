@@ -12,6 +12,11 @@
     align-items: center;
     gap: 30px;
 
+    .logo {
+      width: 60px;
+      height: 60px;
+    }
+
     .navItems {
       display: flex;
       align-items: center;
