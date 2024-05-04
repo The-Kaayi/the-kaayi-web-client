@@ -1,0 +1,162 @@
+@import "src/styles/abstracts/variables";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 80px 20px 20px;
+
+  .topContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom: 40px;
+
+    .footerLeft {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .appLogo {
+          width: 100px;
+          height: 100px;
+        }
+
+        .infoContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .infoItem {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            .infoContent {
+              font-size: $font-size-2;
+              font-weight: 400;
+              line-height: normal;
+            }
+          }
+        }
+      }
+
+      .socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        .socialIcon {
+          width: 25px;
+          height: 25px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            opacity: 0.8;
+            scale: 1.05;
+          }
+        }
+      }
+    }
+
+    .footerRight {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .newsletter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 400px;
+
+        .title {
+          font-size: $font-size-5;
+          font-weight: 600;
+          line-height: normal;
+        }
+
+        .description {
+          font-size: $font-size-2;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .inputContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+
+          .input {
+            width: 100% !important;
+            font-size: $font-size-2;
+            font-weight: 400;
+            line-height: normal;
+            padding: 10px 20px 10px 20px;
+            border: $primary-color 1px solid;
+            border-radius: 10px;
+
+            &:focus {
+              outline: none;
+              border: $primary-color 1px solid;
+            }
+          }
+
+          .subscribeBtn {
+            background-color: $primary-color;
+            color: $white;
+            font-size: $font-size-3;
+            font-weight: 600;
+            line-height: normal;
+            padding: 10px 20px;
+            border-radius: 10px;
+            width: 100%;
+          }
+        }
+      }
+
+      .footerLinks {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        .footerLink {
+          font-size: $font-size-2;
+          font-weight: 400;
+          line-height: normal;
+          transition: all 0.3s ease;
+            
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: $primary-color;
+  }
+
+  .copyright {
+    font-size: $font-size-2;
+    font-weight: 400;
+    line-height: normal;
+    padding: 30px 0 0;
+  }
+}
