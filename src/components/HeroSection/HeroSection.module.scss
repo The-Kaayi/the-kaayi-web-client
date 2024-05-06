@@ -7,7 +7,6 @@
   align-items: center;
   justify-content: center;
   animation: fadeIn 1.5s ease-in-out;
-  outline: solid blue 2px;
 
   .filter {
     display: flex;
@@ -15,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: fit-content;
+    width: max-content;
 
     .imageContainer {
       display: flex;
