@@ -7,6 +7,7 @@ import CustomButton from "@/components/Custom/CustomButton.tsx/CustomButton";
 import CustomInput from "@/components/Custom/CustomInput/CustomInput";
 import styles from "./AuthLayout.module.scss";
 import Link from "next/link";
+import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 
 interface InputField {
   type: string;
@@ -145,7 +146,9 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
 
   return (
     <div className={styles.authLayout}>
-      <div className={styles.appDetails}>APP DETAILS</div>
+      <div className={styles.appDetails}>
+        <AppDetails />
+      </div>
       <div className={styles.authContainer}>
         <div className={styles.authContent}>
           <p className={styles.authTitle}>{authTitle}</p>
