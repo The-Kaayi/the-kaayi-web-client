@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import heroImage from "../../../public/images/main-logo.png";
 import styles from "./HeroSection.module.scss";
 
@@ -7,7 +8,11 @@ const HeroSection: React.FC = () => {
     <section className={styles.heroSection}>
       <div className={styles.filter}>
         <div className={styles.imageContainer}>
-          <Image className={styles.heroImage} src={heroImage} alt="Hero Image"/>
+          <Image
+            className={styles.heroImage}
+            src={heroImage}
+            alt="Hero Image"
+          />
         </div>
         <h2 className={styles.title}>Feast on Feedback</h2>
         <p className={styles.description}>
@@ -15,7 +20,9 @@ const HeroSection: React.FC = () => {
           with the community, discover new flavors, and support your favorite
           spots.
         </p>
-        <button className={styles.ctaBtn}>Get Started</button>
+        <Link href="/dashboard" className={styles.ctaBtn}>
+          Get Started
+        </Link>
       </div>
     </section>
   );
