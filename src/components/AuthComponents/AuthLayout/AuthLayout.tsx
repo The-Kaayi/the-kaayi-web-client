@@ -1,32 +1,10 @@
 "use client";
 import { AuthTypes } from "@/types/auth";
-import { useRouter } from "next/navigation";
-import { Form } from "antd";
-import { Rule } from "antd/lib/form";
-import CustomButton from "@/components/Custom/CustomButton.tsx/CustomButton";
-import CustomInput from "@/components/Custom/CustomInput/CustomInput";
-import styles from "./AuthLayout.module.scss";
 import Link from "next/link";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
+import styles from "./AuthLayout.module.scss";
 
-interface InputField {
-  type: string;
-  name: string;
-  rules: Rule[];
-  placeholder?: string;
-}
-
-interface AuthActionData {
-  buttonLabel: string;
-  authTitle: string;
-  redirectText: string;
-  redirectTo: string;
-  extraText?: string;
-  extraLink?: string;
-  inputFields: InputField[];
-}
-
-const authActionsData: Record<AuthTypes, AuthActionData> = {
+const authActionsData = {
   login: {
     buttonLabel: "Login",
     authTitle: "Login to your account.",
@@ -126,32 +104,18 @@ const authActionsData: Record<AuthTypes, AuthActionData> = {
 };
 
 const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
-  const { buttonLabel, authTitle, inputFields } =
-    authActionsData[authAction] || authActionsData["login"];
-
-  const router = useRouter();
-
-  const [form] = Form.useForm();
-
-  const handleButtonClick = () => {
-    form
-      .validateFields()
-      .then(() => {
-        router.push("/");
-      })
-      .catch((errorInfo) => {
-        console.log("Validation failed:", errorInfo);
-      });
-  };
+  const { authTitle } = authActionsData[authAction];
 
   return (
     <div className={styles.authLayout}>
       <div className={styles.appDetails}>
         <AppDetails />
       </div>
+
       <div className={styles.authContainer}>
         <div className={styles.authContent}>
           <p className={styles.authTitle}>{authTitle}</p>
+
           <div className={styles.redirectContainer}>
             <p className={styles.redirectText}>
               {authActionsData[authAction].redirectText}
@@ -169,29 +133,6 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   .slice(1)}
             </Link>
           </div>
-          <Form
-            className={styles.authForm}
-            form={form}
-            onFinish={handleButtonClick}
-          >
-            {inputFields.map((field) => (
-              <CustomInput
-                key={field.name}
-                type={field.type}
-                name={field.name}
-                rules={field.rules}
-                placeholder={field.placeholder}
-              />
-            ))}
-            <Form.Item>
-              <CustomButton
-                label={buttonLabel}
-                buttonType="primary"
-                htmlType="submit"
-                onClick={handleButtonClick}
-              />
-            </Form.Item>
-          </Form>
         </div>
       </div>
     </div>
