@@ -20,5 +20,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .authContent {
+      width: 40%;
+      min-width: 300px;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .redirectContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        color: rgb(110, 109, 109);
+        font-size: $font-size-2;
+
+        .redirectLink {
+          color: $primary-color;
+        }
+        
+      }
+
+      .authForm {
+        width: 100%;
+      }
+    }
   }
 }
