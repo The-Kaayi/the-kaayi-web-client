@@ -21,9 +21,8 @@
   .appLogoContainer {
     width: 200px;
     height: 200px;
-    // background-color: #247941;
-    background-color: rgb(212, 235, 218);
     display: flex;
+    background-color: $primary-color-50;
     align-items: center;
     justify-content:center;
     border-radius: 20px;
