@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { AuthTypes } from "@/types/auth";
-import AuthLayout from "@/components/AuthLayout/AuthLayout";
+import AuthLayout from "@/components/AuthComponents/AuthLayout/AuthLayout";
 
 const AuthAction: React.FC<{ params: { authAction: AuthTypes } }> = ({
   params,
