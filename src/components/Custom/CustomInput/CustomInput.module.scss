@@ -1,0 +1,12 @@
+@import "src/styles/abstracts/variables";
+@import "src/styles/abstracts/mixins";
+
+.input {
+  padding: 10px 15px !important;
+  border-color: #68686b !important;
+  border-radius: 10px;
+
+  @include max($mobile-m) {
+    padding: 10px 15px 10px 15px !important;
+  }
+}

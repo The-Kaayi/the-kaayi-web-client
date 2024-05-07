@@ -39,6 +39,9 @@
     gap: 20px;
 
     .loginBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100px;
       padding: 10px 20px;
       border-radius: 5px;
@@ -54,6 +57,9 @@
     }
 
     .signupBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100px;
       padding: 10px 20px;
       border-radius: 5px;
