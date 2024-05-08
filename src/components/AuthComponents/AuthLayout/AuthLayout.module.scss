@@ -35,6 +35,12 @@
         line-height: normal;
       }
 
+      .description {
+        font-size: $font-size-2;
+        font-weight: 400;
+        line-height: normal;
+      }
+
       .form {
         display: flex;
         flex-direction: column;
@@ -55,13 +61,35 @@
           }
         }
 
-
         .submitButton {
           width: 100%;
           background-color: $primary-color;
           color: $white;
           border-radius: 10px;
           padding: 10px 15px;
+        }
+
+        .termsCheckboxContainer {
+          .termsCheckbox {
+            width: 15px;
+            height: 15px;
+            accent-color: $primary-color;
+            margin-right: 5px;
+          }
+            .termsCheckboxLabel {
+              font-size: $font-size-2;
+              color: $black;
+              line-height: normal;
+
+              .link {
+                color: $primary-color;
+              }
+            }
+        }
+
+        .forgotPasswordLink {
+          color: $primary-color;
+          font-size: $font-size-2;
         }
       }
 
@@ -70,7 +98,7 @@
         align-items: center;
         justify-content: center;
         gap: 5px;
-        color: rgb(110, 109, 109);
+        color: $black;
         font-size: $font-size-2;
 
         .redirectLink {

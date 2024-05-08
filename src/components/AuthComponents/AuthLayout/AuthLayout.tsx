@@ -34,7 +34,7 @@ const authActionsData = {
     submitButtonLabel: "Sign Up",
   },
   "forgot-password": {
-    authTitle: "Forgot your password? Reset it here.",
+    authTitle: "Forgot your password?",
     redirectText: "Remember your password?",
     redirectTo: "/login",
     formFields: [
@@ -89,6 +89,13 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
         <div className={styles.authContent}>
           <p className={styles.authTitle}>{authTitle}</p>
 
+          {authAction === "forgot-password" && (
+            <p className={styles.description}>
+              Enter the email address associated with your account. We will send
+              you a link to reset your password.
+            </p>
+          )}
+
           <form className={styles.form} onSubmit={handleSubmit}>
             {formFields.map((field) => (
               <div key={field.name} className={styles.formField}>
@@ -103,6 +110,40 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                 />
               </div>
             ))}
+
+            {authAction === "signup" && (
+              <div className={styles.termsCheckboxContainer}>
+                <input
+                  className={styles.termsCheckbox}
+                  type="checkbox"
+                  id="acceptTerms"
+                  name="acceptTerms"
+                  required
+                />
+                <label
+                  className={styles.termsCheckboxLabel}
+                  htmlFor="acceptTerms"
+                >
+                  I accept the{" "}
+                  <Link href="/terms-of-service" className={styles.link}>
+                    Terms of Tervice{" "}
+                  </Link>
+                  and{" "}
+                  <Link href="/privacy-policy" className={styles.link}>
+                    Privacy Policy
+                  </Link>
+                </label>
+              </div>
+            )}
+
+            {authAction === "login" && (
+              <Link
+                className={styles.forgotPasswordLink}
+                href="/forgot-password"
+              >
+                Forgot your password?
+              </Link>
+            )}
 
             <button type="submit" className={styles.submitButton}>
               {submitButtonLabel}
