@@ -1,0 +1,61 @@
+@import "@/styles/abstracts/variables.scss";
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    height: 400px;
+    padding: 20px;
+    border-left: $primary-color 1px solid;
+
+    .info {
+
+      .title {
+        font-size: $font-size-15;
+        font-weight: bold;
+        line-height: 46px;
+      }
+
+      .desc1 {
+        font-size: $font-size-13;
+        font-weight: 400;
+        color: $primary-color;
+      }
+
+      .desc2 {
+        font-size: $font-size-3;
+        font-weight: 400;
+        color: $black;
+      }
+    }
+
+    .link {
+      font-size: $font-size-3;
+      font-weight: 400;
+      color: $primary-color;
+      border-bottom: $primary-color 1px solid;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    position: absolute;
+    bottom: 30px;
+    font-size: $font-size-2;
+
+    .link {
+      color: $primary-color;
+    }
+  }
+}
