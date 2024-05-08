@@ -6,7 +6,7 @@ import styles from "./AuthLayout.module.scss";
 
 const authActionsData = {
   login: {
-    authTitle: "Login to your account.",
+    authTitle: "Welcome Back",
     redirectText: "Don't have an account?",
     redirectTo: "/signup",
     formFields: [
@@ -16,7 +16,7 @@ const authActionsData = {
     submitButtonLabel: "Login",
   },
   signup: {
-    authTitle: "Create a new account.",
+    authTitle: "Create Account",
     redirectText: "Already have an account?",
     redirectTo: "/login",
     formFields: [
@@ -92,7 +92,6 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
           <form className={styles.form} onSubmit={handleSubmit}>
             {formFields.map((field) => (
               <div key={field.name} className={styles.formField}>
-                <label className={styles.formLabel} htmlFor={field.name}>{field.label}</label>
                 <input
                   className={styles.formInput}
                   type={field.type}
@@ -100,9 +99,11 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   name={field.name}
                   required={field.required}
                   onChange={handleChange}
+                  placeholder={field.label}
                 />
               </div>
             ))}
+
             <button type="submit" className={styles.submitButton}>
               {submitButtonLabel}
             </button>
