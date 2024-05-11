@@ -13,7 +13,13 @@ const poppins = Poppins({
 });
 
 const goudyStm = localFonts({
-  src: "../../../public/fonts/GoudyStm-webfont.woff",
+  src:[
+    {
+      path: "../../../public/fonts/GoudyStm-webfont.woff",
+      weight: "400",
+      style: "normal"
+    }
+  ]
 })
 
 export const metadata: Metadata = {
