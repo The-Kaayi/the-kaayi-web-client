@@ -9,13 +9,6 @@ const HeroSection: React.FC = () => {
         <div className={styles.imageContainer}>
           <Image className={styles.heroImage} src={heroImage} alt="Hero Image"/>
         </div>
-        <h2 className={styles.title}>Feast on Feedback</h2>
-        <p className={styles.description}>
-          Share your dining experiences and explore local favorites. Connect
-          with the community, discover new flavors, and support your favorite
-          spots.
-        </p>
-        <button className={styles.ctaBtn}>Get Started</button>
       </div>
     </section>
   );
