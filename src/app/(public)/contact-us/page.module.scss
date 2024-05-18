@@ -25,5 +25,38 @@
 
   .form {
     width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+    padding: 100px 50px;
+
+    .formField {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: $dark-font;
+
+      &:last-child {
+        grid-column: span 2;
+      }
+
+      .formInput {
+        border-bottom: 1px solid $dark-font;
+        padding: 10px 15px;
+        resize: none;
+
+        &::placeholder {
+          font-size: $font-size-1;
+          font-weight: 400;
+          line-height: normal;
+          color: $primary-color-900;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
   }
 }

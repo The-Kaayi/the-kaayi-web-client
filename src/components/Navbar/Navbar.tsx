@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <Image className={styles.logo} src={appLogo} alt="App Logo" />
         <div className={styles.navItems}>
           {navItems.map((item) => (
-            <Link href={item.link} key={item.name}>
+            <Link className={styles.navItem} href={item.link} key={item.name}>
               {item.name}
             </Link>
           ))}
