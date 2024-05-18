@@ -1,0 +1,11 @@
+@import "@/styles/abstracts/variables";
+
+.aboutPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 120px 20px;
+}
