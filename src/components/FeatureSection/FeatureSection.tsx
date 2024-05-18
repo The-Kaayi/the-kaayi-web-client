@@ -16,7 +16,7 @@ const FeatureSection: React.FC = () => {
               alt={feature.name}
             />
             <h4 className={styles.featureTitle}>{feature.name}</h4>
-            <p className={styles.featureContent}>{feature.content}</p>
+            <p className={styles.featureContent}>{feature.content.slice(0, 120)}...</p>
           </div>
         ))}
       </div>

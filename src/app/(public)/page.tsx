@@ -1,3 +1,4 @@
+"use client";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import FeatureSection from "@/components/FeatureSection/FeatureSection";
 import styles from "./page.module.scss";
