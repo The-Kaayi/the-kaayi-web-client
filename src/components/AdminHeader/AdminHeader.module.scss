@@ -1,0 +1,58 @@
+@import "src/styles/abstracts/variables";
+
+.adminHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+
+  .searchBar {
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    border: 1px solid $dark-font;
+    padding: 8px 10px;
+
+    .searchIcon {
+      width: 20px;
+      height: 20px;
+    }
+    .searchInput {
+      width: 300px;
+      outline: none;
+      padding: 0 10px;
+      font-size: $font-size-2;
+    }
+  }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .notifIcon {
+      width: 30px;
+      height: 30px;
+    }
+
+    .userImg {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+      background-color: $primary-color;
+      color: $white;
+    }
+
+    .userName {
+      font-size: $font-size-3;
+      font-weight: 500;
+    }
+  }
+}
