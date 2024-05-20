@@ -15,52 +15,31 @@ import styles from "./AdminSideBar.module.scss";
 
 const Sidebar: React.FC<{}> = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [currentPath, setCurrentPath] = useState("dashboard");
+  const [currentPath, setCurrentPath] = useState("overview");
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const segments = pathname.split("/");
-    const path =
-      segments[1] === "en" && segments.length > 2
-        ? segments[2]
-        : segments[1] || "dashboard";
+    const segments = pathname.split("/admin-panel/");
+    const path = segments[1] || "overview";
     setCurrentPath(path);
   }, [pathname]);
 
   const localizedSidebarItems: MenuProps["items"] = [
     {
       label: "Overview",
-      key: "admin-panel",
-      icon: (
-        <Image
-          src={overviewIcon}
-          alt="Overview Icon"
-          width={25}
-        />
-      ),
+      key: "/",
+      icon: <Image src={overviewIcon} alt="Overview Icon" width={25} />,
     },
     {
       label: "Missions",
       key: "missions",
-      icon: (
-        <Image
-          src={missionsIcon}
-          alt="Missions Icon"
-          width={25}
-        />
-      ),
+      icon: <Image src={missionsIcon} alt="Missions Icon" width={25} />,
     },
     {
       label: "Rewards",
       key: "rewards",
-      icon: (
-        <Image
-          src={rewardsIcon}
-          alt="Rewards Icon"
-          width={25}
-        />
-      ),
+      icon: <Image src={rewardsIcon} alt="Rewards Icon" width={25} />,
     },
   ];
 
@@ -81,8 +60,13 @@ const Sidebar: React.FC<{}> = () => {
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setCurrentPath(e.key);
-    router.push(`/${e.key}`);
+    if (e.key === "/") {
+      setCurrentPath("overview");
+      router.push("/admin-panel");
+    } else {
+      setCurrentPath(e.key);
+      router.push(`/admin-panel/${e.key}`);
+    }
   };
 
   return (
