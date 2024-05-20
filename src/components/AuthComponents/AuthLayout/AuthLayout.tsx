@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
 import { AuthTypes } from "@/types/auth";
 import Link from "next/link";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
@@ -69,6 +70,8 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
     authActionsData[authAction];
   const [formData, setFormData] = useState({});
 
+  const router = useRouter();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -77,6 +80,8 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
     e.preventDefault();
     // Handle form submission here
     console.log("Form submitted:", formData);
+    router.push(authAction === "signup" ? "/login" : "/admin-panel");
+    
   };
 
   return (
