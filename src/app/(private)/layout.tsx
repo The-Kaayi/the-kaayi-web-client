@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import { APP_NAME } from "@/utils/constants";
 import AdminHeader from "@/components/AdminHeader/AdminHeader";
 import "@/styles/base/reset.scss";
+import styles from "./layout.module.scss";
+import AdminSideBar from "@/components/AdminSideBar/AdminSideBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <AdminHeader /> {children}
+          <AdminSideBar />
+          <AdminHeader />
+          <div className={styles.content}>{children}</div>
       </body>
     </html>
   );

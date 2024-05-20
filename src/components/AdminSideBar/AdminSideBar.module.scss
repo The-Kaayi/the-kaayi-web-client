@@ -1,0 +1,20 @@
+@import "src/styles/abstracts/variables";
+
+.adminSideBar {
+  min-width: 150px;
+  max-width: 150px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  border-right: 1px solid $dark-font;
+
+  .appLogo {
+    width: 50px;
+    height: 50px;
+  }
+}
