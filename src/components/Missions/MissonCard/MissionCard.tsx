@@ -9,11 +9,13 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
     <div className={styles.missionCard}>
       <div className={styles.shopInfo}>
         <div className={styles.logoContainer}>
-          <Image
-            className={styles.shopLogo}
-            src={cardImage}
-            alt="Mission Image"
-          />
+          <Link href={`missions/${missionUUID}`}>
+            <Image
+              className={styles.shopLogo}
+              src={cardImage}
+              alt="Mission Image"
+            />
+          </Link>
           <Link href={`missions/edit-mission/${missionUUID}`}>
             <Image className={styles.editIcon} src={editIcon} alt="Edit Icon" />
           </Link>
@@ -23,17 +25,15 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
       </div>
 
       <div className={styles.missionInfo}>
-        <p className={styles.missionTitle}>Mission Title</p>
+        <Link href={`missions/${missionUUID}`} className={styles.missionTitle}>
+          Mission Title
+        </Link>
         <p className={styles.missionDesc}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
         </p>
       </div>
-
-      <Link href={`missions/${missionUUID}`} className={styles.viewBtn}>
-        View details
-      </Link>
     </div>
   );
 };

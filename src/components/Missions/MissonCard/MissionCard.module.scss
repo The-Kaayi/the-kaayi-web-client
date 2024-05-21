@@ -88,16 +88,4 @@
       line-height: normal;
     }
   }
-
-  .viewBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 15px;
-    border-radius: 5px;
-    width: 80%;
-    background-color: $primary-color;
-    color: $white;
-    transition: all 0.3s ease-in-out;
-  } 
 }
