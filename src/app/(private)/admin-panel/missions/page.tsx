@@ -1,9 +1,26 @@
+import Link from "next/link";
+import MissionCard from "@/components/Missions/MissonCard/MissionCard";
 import styles from "./page.module.scss";
 
 const Missions: React.FC = () => {
+  const renderMissionCards = () => {
+    return Array.from({ length: 7 }, (_, i) => (
+      <MissionCard missionUUID={(i + 1).toString()} key={i} />
+    ));
+  };
+
   return (
     <div className={styles.missions}>
-      <h1>Missions</h1>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>Missions</h2>
+        <Link
+          href="/admin-panel/missions/create-mission"
+          className={styles.addBtn}
+        >
+          + Add a new mission
+        </Link>
+      </div>
+      <div className={styles.content}>{renderMissionCards()}</div>
     </div>
   );
 };
