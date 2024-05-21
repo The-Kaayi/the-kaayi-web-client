@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import classNames from "classnames";
 import cardImage from "../../../../public/images/MissionCard/card-image.jpg";
 import editIcon from "../../../../public/images/MissionCard/edit.svg";
 import styles from "./MissionCard.module.scss";
 
 const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
+  const status: string = "Active";
   return (
     <div className={styles.missionCard}>
       <div className={styles.shopInfo}>
@@ -19,6 +21,13 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
           <Link href={`missions/edit-mission/${missionUUID}`}>
             <Image className={styles.editIcon} src={editIcon} alt="Edit Icon" />
           </Link>
+          <p
+            className={classNames(styles.status, {
+              [styles.closed]: status === "Closed",
+            })}
+          >
+            {status}
+          </p>
         </div>
         <p className={styles.shopTitle}>Shop Title</p>
         <p className={styles.shopLocation}>Shop Location</p>
