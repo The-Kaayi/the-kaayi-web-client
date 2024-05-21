@@ -1,4 +1,3 @@
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import styles from "./page.module.scss";
 
 const missionUUID = ({ params }: { params: { missionUUID: string } }) => {

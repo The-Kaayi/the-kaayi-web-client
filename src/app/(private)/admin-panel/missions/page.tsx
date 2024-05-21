@@ -20,7 +20,7 @@ const Missions: React.FC = () => {
           + Add a new mission
         </Link>
       </div>
-      <div className={styles.content}> {renderMissionCards()}</div>
+      <div className={styles.content}>{renderMissionCards()}</div>
     </div>
   );
 };
