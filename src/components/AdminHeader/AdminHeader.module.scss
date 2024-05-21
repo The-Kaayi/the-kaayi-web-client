@@ -11,6 +11,7 @@
   right: 0;
   background-color: white;
   border-bottom: 1px solid $light-border;
+  z-index: 99;
   
   .searchBar {
     display: flex;

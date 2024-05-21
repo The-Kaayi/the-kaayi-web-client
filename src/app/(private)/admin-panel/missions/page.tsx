@@ -4,8 +4,8 @@ import styles from "./page.module.scss";
 
 const Missions: React.FC = () => {
   const renderMissionCards = () => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <MissionCard missionUUID={i.toString()} key={i} />
+    return Array.from({ length: 7 }, (_, i) => (
+      <MissionCard missionUUID={(i + 1).toString()} key={i} />
     ));
   };
 

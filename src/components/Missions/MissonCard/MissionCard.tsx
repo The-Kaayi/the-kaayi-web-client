@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import cardImage2 from "../../../../public/images/MissionCard/card-image.jpg";
+import cardImage from "../../../../public/images/MissionCard/card-image.jpg";
+import editIcon from "../../../../public/images/MissionCard/edit.svg";
 import styles from "./MissionCard.module.scss";
 
 const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
@@ -10,9 +11,12 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
         <div className={styles.logoContainer}>
           <Image
             className={styles.shopLogo}
-            src={cardImage2}
+            src={cardImage}
             alt="Mission Image"
           />
+          <Link href={`missions/edit-mission/${missionUUID}`}>
+            <Image className={styles.editIcon} src={editIcon} alt="Edit Icon" />
+          </Link>
         </div>
         <p className={styles.shopTitle}>Shop Title</p>
         <p className={styles.shopLocation}>Shop Location</p>
@@ -27,14 +31,9 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
         </p>
       </div>
 
-      <div className={styles.btnContainer}>
-        <Link href={`missions/${missionUUID}`} className={styles.viewBtn}>
-          View
-        </Link>
-        <Link href={`missions/edit-mission/${missionUUID}`} className={styles.editBtn}>
-          Edit
-        </Link>
-      </div>
+      <Link href={`missions/${missionUUID}`} className={styles.viewBtn}>
+        View details
+      </Link>
     </div>
   );
 };

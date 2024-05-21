@@ -1,6 +1,6 @@
 import styles from "./page.module.scss";
 
-const missionUUID = ({ params }: { params: { missionUUID: string } }) => {
+const MissionUUID = ({ params }: { params: { missionUUID: string } }) => {
   const { missionUUID } = params;
   return (
     <div className={styles.mission}>
@@ -9,4 +9,4 @@ const missionUUID = ({ params }: { params: { missionUUID: string } }) => {
   );
 };
 
-export default missionUUID;
+export default MissionUUID;
