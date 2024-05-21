@@ -4,12 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 20px;
+  padding: 20px 30px;
   position: fixed;
   width: calc(100% - 75px);
   top: 0;
   right: 0;
   background-color: white;
+  border-bottom: 1px solid $light-border;
   
   .searchBar {
     display: flex;

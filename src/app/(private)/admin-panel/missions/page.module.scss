@@ -2,7 +2,10 @@
 
 .missions {
   min-height: calc(100vh - 75px);
-  padding: 20px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 
   .titleContainer {
     display: flex;
@@ -29,5 +32,14 @@
         scale: 0.97;
       }
     }
+  }
+
+  .content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+    row-gap: 30px;
+    column-gap: 20px;
+    justify-items: center;
   }
 }
