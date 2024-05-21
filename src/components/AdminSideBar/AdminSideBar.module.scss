@@ -14,7 +14,7 @@
   width: 75px;
   transition: width 0.6s ease;
   background-color: $white;
-  border-right: 1px solid $dark-font;
+  border-right: 1px solid lighten(gray, 40%);
 
   &.ltr {
     border-left: 1px solid $dark-font;

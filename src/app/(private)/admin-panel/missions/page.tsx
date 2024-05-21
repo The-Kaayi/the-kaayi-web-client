@@ -3,7 +3,10 @@ import styles from "./page.module.scss";
 const Missions: React.FC = () => {
   return (
     <div className={styles.missions}>
-      <h1>Missions</h1>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>Missions</h2>
+        <button className={styles.addBtn}>+ Add a new mission</button>
+      </div>
     </div>
   );
 };
