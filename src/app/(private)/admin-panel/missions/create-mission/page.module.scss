@@ -1,13 +1,16 @@
 @import "src/styles/abstracts/variables";
 
 .createMission {
-    min-height: calc(100vh - 75px);
-    padding: 40px 30px;
+  min-height: calc(100vh - 75px);
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   .titleContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 
     .title {
       font-size: $font-size-7;
@@ -21,6 +24,103 @@
       .backIcon {
         width: 20px;
         height: 20px;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .shopDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .title {
+        font-size: $font-size-5;
+        font-weight: 500;
+      }
+
+      .details {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+
+        .subContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 50%;
+
+          .label {
+            font-size: $font-size-3;
+            font-weight: 400;
+          }
+
+          .input {
+            font-size: $font-size-3;
+            font-weight: 400;
+            padding: 8px 15px;
+            border: 1px solid $light-border;
+            border-radius: 10px;
+            width: 60%;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .missionDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .title {
+        font-size: $font-size-5;
+        font-weight: 500;
+      }
+
+      .details {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        .subContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 50%;
+
+          .label {
+            font-size: $font-size-3;
+            font-weight: 400;
+          }
+
+          .input {
+            font-size: $font-size-3;
+            font-weight: 400;
+            padding: 8px 15px;
+            border: 1px solid $light-border;
+            border-radius: 10px;
+            width: 60%;
+            outline: none;
+          }
+
+          .textarea {
+            font-size: $font-size-3;
+            font-weight: 400;
+            padding: 8px 15px;
+            border: 1px solid $light-border;
+            border-radius: 10px;
+            width: 60%;
+            outline: none;
+            resize: none;
+            height: 200px;
+          }
+        }
       }
     }
   }
