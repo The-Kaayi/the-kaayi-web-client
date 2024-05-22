@@ -44,16 +44,15 @@
       }
 
       .details {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 50px;
 
         .subContainer {
           display: flex;
           flex-direction: column;
           gap: 10px;
-          width: 50%;
+          width: 100%;
 
           .label {
             font-size: $font-size-3;

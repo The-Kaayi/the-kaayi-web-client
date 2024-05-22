@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
+import FileUpload from "@/components/FileUpload/FileUpload";
 
 const CreateMission: React.FC = () => {
   return (
@@ -20,7 +21,11 @@ const CreateMission: React.FC = () => {
           <div className={styles.details}>
             <div className={styles.subContainer}>
               <label className={styles.label}>Name</label>
-              <input className={styles.input} type="text" placeholder=" Enter the shop name" />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder=" Enter the shop name"
+              />
             </div>
 
             <div className={styles.subContainer}>
@@ -31,6 +36,10 @@ const CreateMission: React.FC = () => {
                 placeholder="Enter the shop location"
               />
             </div>
+            <div className={styles.subContainer}>
+              <div  className={styles.label}>Logo</div>
+              <FileUpload maxFileSize={1} />
+            </div>
           </div>
         </div>
 
@@ -39,7 +48,11 @@ const CreateMission: React.FC = () => {
           <div className={styles.details}>
             <div className={styles.subContainer}>
               <label className={styles.label}>Title</label>
-              <input className={styles.input} type="text" placeholder="Enter the mission title" />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Enter the mission title"
+              />
             </div>
 
             <div className={styles.subContainer}>

@@ -1,0 +1,58 @@
+@import "src/styles/abstracts/variables";
+
+.fileUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 100%;
+  border: 1px solid $light-border;
+  border-radius: 10px;
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    .uploadIcon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .uploadInfo {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: $font-size-2;
+      color: gray;
+
+      .uploadBtn {
+        font-size: $font-size-2;
+        background-color: $primary-color;
+        color: $white;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    }
+
+    .fileFormats {
+      font-size: $font-size-2;
+      font-weight: 400;
+      color: gray;
+    }
+
+    .maxFileSize {
+      font-size: $font-size-2;
+      font-weight: 400;
+      color: gray;
+    }
+  }
+
+  .errorMessage {
+    color: $error-red;
+    font-size: $font-size-2;    
+  }
+}
