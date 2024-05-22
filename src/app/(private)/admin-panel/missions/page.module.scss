@@ -41,5 +41,14 @@
     row-gap: 30px;
     column-gap: 30px;
     justify-items: center;
+    position: relative;
+
+    .noMissionsText {
+      font-size: $font-size-3;
+      font-weight: 400;
+      color: gray;
+      position: absolute;
+      top: 200px;
+    }
   }
 }
