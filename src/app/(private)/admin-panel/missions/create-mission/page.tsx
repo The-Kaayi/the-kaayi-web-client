@@ -20,7 +20,7 @@ const CreateMission: React.FC = () => {
           <div className={styles.details}>
             <div className={styles.subContainer}>
               <label className={styles.label}>Name</label>
-              <input className={styles.input} type="text" placeholder="Name" />
+              <input className={styles.input} type="text" placeholder=" Enter the shop name" />
             </div>
 
             <div className={styles.subContainer}>
@@ -28,7 +28,7 @@ const CreateMission: React.FC = () => {
               <input
                 className={styles.input}
                 type="text"
-                placeholder="Location"
+                placeholder="Enter the shop location"
               />
             </div>
           </div>
@@ -39,14 +39,14 @@ const CreateMission: React.FC = () => {
           <div className={styles.details}>
             <div className={styles.subContainer}>
               <label className={styles.label}>Title</label>
-              <input className={styles.input} type="text" placeholder="Title" />
+              <input className={styles.input} type="text" placeholder="Enter the mission title" />
             </div>
 
             <div className={styles.subContainer}>
               <label className={styles.label}>Description</label>
               <textarea
                 className={styles.textarea}
-                placeholder="Description"
+                placeholder="Enter the mission description"
               />
             </div>
           </div>
