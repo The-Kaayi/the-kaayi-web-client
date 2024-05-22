@@ -1,0 +1,27 @@
+@import "src/styles/abstracts/variables";
+
+.createMission {
+    min-height: calc(100vh - 75px);
+    padding: 40px 30px;
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .title {
+      font-size: $font-size-7;
+      font-weight: 600;
+    }
+
+    .backBtn {
+      display: flex;
+      align-items: center;
+
+      .backIcon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
