@@ -2,7 +2,7 @@
 
 .createMission {
   min-height: calc(100vh - 75px);
-  padding: 40px 30px;
+  padding: 40px 30px 80px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -119,6 +119,44 @@
             resize: none;
             height: 200px;
           }
+        }
+      }
+    }
+
+    .btnContainer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+
+      .saveBtn {
+        font-size: $font-size-2;
+        font-weight: 400;
+        color: $primary-color;
+        background-color: $white;
+        border: 1px solid $primary-color;
+        border-radius: 5px;
+        padding: 10px 15px;
+        width: 120px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $primary-color-50;
+        }
+      }
+
+      .postBtn {
+        font-size: $font-size-2;
+        font-weight: 400;
+        color: $white;
+        background-color: $primary-color;
+        border: 1px solid $primary-color;
+        border-radius: 5px;
+        padding: 10px 15px;
+        width: 120px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $primary-color-700;
         }
       }
     }

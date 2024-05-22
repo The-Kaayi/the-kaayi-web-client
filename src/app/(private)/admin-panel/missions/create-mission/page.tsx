@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
-import styles from "./page.module.scss";
 import FileUpload from "@/components/FileUpload/FileUpload";
+import styles from "./page.module.scss";
 
 const CreateMission: React.FC = () => {
   return (
@@ -37,7 +37,7 @@ const CreateMission: React.FC = () => {
               />
             </div>
             <div className={styles.subContainer}>
-              <div  className={styles.label}>Logo</div>
+              <div className={styles.label}>Logo</div>
               <FileUpload maxFileSize={1} />
             </div>
           </div>
@@ -63,6 +63,10 @@ const CreateMission: React.FC = () => {
               />
             </div>
           </div>
+        </div>
+        <div className={styles.btnContainer}>
+          <button className={styles.saveBtn}>Save</button>
+          <button className={styles.postBtn}>Post</button>
         </div>
       </div>
     </div>
