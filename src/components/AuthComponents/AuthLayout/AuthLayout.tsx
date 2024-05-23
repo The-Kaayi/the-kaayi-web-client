@@ -1,74 +1,25 @@
-import { useState, ChangeEvent } from "react";
+"use client";
+import { useState, ChangeEvent, FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthTypes } from "@/types/auth";
-import Link from "next/link";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/config";
+import authActionsData from "@/data/authActionsData";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
-
-const authActionsData = {
-  login: {
-    authTitle: "Welcome Back",
-    redirectText: "Don't have an account?",
-    redirectTo: "/signup",
-    formFields: [
-      { name: "email", label: "Email", type: "email", required: true },
-      { name: "password", label: "Password", type: "password", required: true },
-    ],
-    submitButtonLabel: "Login",
-  },
-  signup: {
-    authTitle: "Create Account",
-    redirectText: "Already have an account?",
-    redirectTo: "/login",
-    formFields: [
-      { name: "firstName", label: "First Name", type: "text", required: true },
-      { name: "lastName", label: "Last Name", type: "text", required: true },
-      { name: "email", label: "Email", type: "email", required: true },
-      { name: "password", label: "Password", type: "password", required: true },
-      {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-      },
-    ],
-    submitButtonLabel: "Sign Up",
-  },
-  "forgot-password": {
-    authTitle: "Forgot your password?",
-    redirectText: "Remember your password?",
-    redirectTo: "/login",
-    formFields: [
-      { name: "email", label: "Email", type: "email", required: true },
-    ],
-    submitButtonLabel: "Send Reset Link",
-  },
-  "reset-password": {
-    authTitle: "Reset your password.",
-    redirectText: "Remember your password?",
-    redirectTo: "/login",
-    formFields: [
-      {
-        name: "password",
-        label: "New Password",
-        type: "password",
-        required: true,
-      },
-      {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-      },
-    ],
-    submitButtonLabel: "Reset Password",
-  },
-};
 
 const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   const { authTitle, formFields, submitButtonLabel } =
     authActionsData[authAction];
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<{ [key: string]: string }>({});
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
   const router = useRouter();
 
@@ -76,12 +27,44 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSignup = async () => {
+    console.log("Email:", formData["email"], "Password:", formData["password"]);
+    const res = await createUserWithEmailAndPassword(
+      formData["email"],
+      formData["password"]
+    );
+    console.log("Signup Response:", res);
+    if (res) {
+      router.push("/login");
+    }
+  };
+
+  const handleLogin = async () => {
+    console.log("Email:", formData["email"], "Password:", formData["password"]);
+    const res = await signInWithEmailAndPassword(
+      formData["email"],
+      formData["password"]
+    );
+    console.log("Login Response:", res);
+    if (res) {
+      router.push("/admin-panel");
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    router.push(authAction === "signup" ? "/login" : "/admin-panel");
-    
+
+    switch (authAction) {
+      case "signup":
+        await handleSignup();
+        break;
+      case "login":
+        await handleLogin();
+        break;
+      default:
+        console.error("Unsupported authAction:", authAction);
+        return;
+    }
   };
 
   return (
@@ -131,7 +114,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                 >
                   I accept the{" "}
                   <Link href="/terms-of-service" className={styles.link}>
-                    Terms of Tervice{" "}
+                    Terms of Service{" "}
                   </Link>
                   and{" "}
                   <Link href="/privacy-policy" className={styles.link}>
