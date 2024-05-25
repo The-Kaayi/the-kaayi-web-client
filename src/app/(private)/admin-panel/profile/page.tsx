@@ -1,8 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
-import arrowIcon from "../../../../../public/images/Missions/arrow-right.svg";
 import Profile from "@/components/Profile/Profile";
 import styles from "./page.module.scss";
 
@@ -15,7 +12,7 @@ const tabsItems: TabsProps["items"] = [
   {
     key: "2",
     label: `Settings`,
-    children: "Passowrd Settings",
+    children: "Password Settings",
   },
 ];
 

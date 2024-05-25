@@ -5,25 +5,13 @@ import Link from "next/link";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
 import notifIcon from "../../../public/images/AdminHeader/notification.svg";
 import searchIcon from "../../../public/images/AdminHeader/search.svg";
 import downArrowIcon from "../../../public/images/AdminHeader/down-arrow.svg";
 import styles from "./AdminHeader.module.scss";
-
-const userDropdownItems: MenuProps["items"] = [
-  {
-    key: "1",
-    label: <Link href="/admin-panel/profile">Profile </Link>,
-    icon: "",
-  },
-  {
-    key: "2",
-    label: "Logout",
-    icon: "",
-  },
-];
 
 const AdminHeader: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,12 +22,34 @@ const AdminHeader: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User signed out");
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
+
+  const userDropdownItems: MenuProps["items"] = [
+    {
+      key: "1",
+      label: <Link href="/admin-panel/profile">Profile</Link>,
+      icon: "",
+    },
+    {
+      key: "2",
+      label: <span onClick={handleLogout}>Logout</span>,
+      icon: "",
+    },
+  ];
+
   useEffect(() => {
     const fetchUserInfo = async () => {
       if (user) {
         const q = query(
           collection(db, "users"),
-          where("userID", "==", user.uid)
+          where("email", "==", user.email)
         );
         const querySnapshot = await getDocs(q);
 
@@ -61,10 +71,6 @@ const AdminHeader: React.FC = () => {
 
   if (error) {
     return <p>Error: {error.message}</p>;
-  }
-
-  if (!user) {
-    return <p>Please log in to view your profile.</p>;
   }
 
   return (
@@ -92,10 +98,12 @@ const AdminHeader: React.FC = () => {
         >
           <div>
             <div className={styles.userImg}>
-              {userInfo?.firstName.charAt(0).toUpperCase()}
+              {userInfo?.firstName
+                ? userInfo.firstName.charAt(0).toUpperCase()
+                : "U"}
             </div>
             <div className={styles.userDetails}>
-              <p className={styles.userName}>{userInfo?.firstName}</p>
+              <p className={styles.userName}>{userInfo?.firstName || "User"}</p>
               <Image
                 className={styles.downArrowIcon}
                 src={downArrowIcon}
