@@ -1,11 +1,28 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Dropdown } from "antd";
+import type { MenuProps } from "antd";
 import notifIcon from "../../../public/images/AdminHeader/notification.svg";
 import searchIcon from "../../../public/images/AdminHeader/search.svg";
+import downArrowIcon from "../../../public/images/AdminHeader/down-arrow.svg";
 import styles from "./AdminHeader.module.scss";
 
 const userName = "John Doe";
+
+const userDropdownItems: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <Link href="/admin-panel/profile">Profile </Link>,
+    icon: "",
+  },
+  {
+    key: "2",
+    label: <Link href="/admin-panel/logout">Logout</Link>,
+    icon: "",
+  },
+];
 
 const AdminHeader: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +31,6 @@ const AdminHeader: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
-  
   return (
     <div className={styles.adminHeader}>
       <div className={styles.searchBar}>
@@ -33,8 +49,25 @@ const AdminHeader: React.FC = () => {
           src={notifIcon}
           alt="Notification"
         />
-        <div className={styles.userImg}>{userName.charAt(0).toUpperCase()}</div>
-        <p className={styles.userName}>{userName}</p>
+        <Dropdown
+          className={styles.userDropdownItems}
+          menu={{ items: userDropdownItems }}
+          overlayClassName={styles.userDropdown}
+        >
+          <div>
+            <div className={styles.userImg}>
+              {userName.charAt(0).toUpperCase()}
+            </div>
+            <div className={styles.userDetails}>
+              <p className={styles.userName}>{userName}</p>
+              <Image
+                className={styles.downArrowIcon}
+                src={downArrowIcon}
+                alt="Down Arrow"
+              />
+            </div>
+          </div>
+        </Dropdown>
       </div>
     </div>
   );
