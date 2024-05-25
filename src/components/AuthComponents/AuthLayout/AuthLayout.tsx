@@ -7,7 +7,8 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/config";
+import { auth, db } from "@/firebase/config";
+import { collection, addDoc } from "firebase/firestore";
 import authActionsData from "@/data/authActionsData";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
@@ -28,14 +29,29 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   };
 
   const handleSignup = async () => {
-    console.log("Email:", formData["email"], "Password:", formData["password"]);
-    const res = await createUserWithEmailAndPassword(
-      formData["email"],
-      formData["password"]
-    );
-    console.log("Signup Response:", res);
-    if (res) {
-      router.push("/login");
+    try {
+      console.log(
+        "Email:",
+        formData["email"],
+        "Password:",
+        formData["password"]
+      );
+      const res = await createUserWithEmailAndPassword(
+        formData["email"],
+        formData["password"]
+      );
+      console.log("Signup Response:", res);
+      if (res) {
+        const userData = { ...formData };
+        delete userData["password"];
+        delete userData["confirmPassword"];
+
+        await addDoc(collection(db, "users"), userData);
+
+        router.push("/login");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
     }
   };
 
