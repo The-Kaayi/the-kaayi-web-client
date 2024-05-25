@@ -1,15 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "@/firebase/config";
 import notifIcon from "../../../public/images/AdminHeader/notification.svg";
 import searchIcon from "../../../public/images/AdminHeader/search.svg";
 import downArrowIcon from "../../../public/images/AdminHeader/down-arrow.svg";
 import styles from "./AdminHeader.module.scss";
-
-const userName = "John Doe";
 
 const userDropdownItems: MenuProps["items"] = [
   {
@@ -26,10 +27,45 @@ const userDropdownItems: MenuProps["items"] = [
 
 const AdminHeader: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const [userInfo, setUserInfo] = useState<any>(null);
 
   const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (user) {
+        const q = query(
+          collection(db, "users"),
+          where("email", "==", user.email)
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const userData = querySnapshot.docs[0].data();
+          setUserInfo(userData);
+        } else {
+          console.log("No such document!");
+        }
+      }
+    };
+
+    fetchUserInfo();
+  }, [user]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (!user) {
+    return <p>Please log in to view your profile.</p>;
+  }
 
   return (
     <div className={styles.adminHeader}>
@@ -56,10 +92,10 @@ const AdminHeader: React.FC = () => {
         >
           <div>
             <div className={styles.userImg}>
-              {userName.charAt(0).toUpperCase()}
+              {userInfo?.firstName.charAt(0).toUpperCase()}
             </div>
             <div className={styles.userDetails}>
-              <p className={styles.userName}>{userName}</p>
+              <p className={styles.userName}>{userInfo?.firstName}</p>
               <Image
                 className={styles.downArrowIcon}
                 src={downArrowIcon}

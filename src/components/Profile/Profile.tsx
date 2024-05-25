@@ -24,7 +24,6 @@ const Profile: React.FC = () => {
         if (!querySnapshot.empty) {
           const userData = querySnapshot.docs[0].data();
           setUserInfo(userData);
-          console.log("User data:", userData);
         } else {
           console.log("No such document!");
         }
