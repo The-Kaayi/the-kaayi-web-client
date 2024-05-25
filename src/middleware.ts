@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
   const loggedIn = request.cookies.get("loggedIn")?.value === "true";
   const protectedRoutes: string[] = ["/admin-panel"];
 
-  const authRoutes = ["login", "signup", "forgot-password", "reset-password"];
+  const authRoutes = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
   const loginUrl = process.env.NEXT_AUTH_LOGIN_URL;
 
