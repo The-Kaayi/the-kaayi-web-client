@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
+import Cookies from "js-cookie";
 import notifIcon from "../../../public/images/AdminHeader/notification.svg";
 import searchIcon from "../../../public/images/AdminHeader/search.svg";
 import downArrowIcon from "../../../public/images/AdminHeader/down-arrow.svg";
@@ -18,6 +20,8 @@ const AdminHeader: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState<any>(null);
 
+  const router = useRouter();
+
   const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
@@ -25,7 +29,8 @@ const AdminHeader: React.FC = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      console.log("User signed out");
+      router.push("/login");
+      Cookies.set("loggedIn", "false");
     } catch (error) {
       console.error("Error signing out: ", error);
     }

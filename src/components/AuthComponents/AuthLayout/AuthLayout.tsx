@@ -3,6 +3,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthTypes } from "@/types/auth";
+import Cookies from "js-cookie";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword,
@@ -12,6 +13,7 @@ import { collection, addDoc } from "firebase/firestore";
 import authActionsData from "@/data/authActionsData";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
+import { cookies } from "next/headers";
 
 const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   const { authTitle, formFields, submitButtonLabel } =
@@ -66,7 +68,11 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
     );
     console.log("Login Response:", res);
     if (res) {
+      Cookies.set("loggedIn", "true");
       router.push("/admin-panel");
+    } else {
+      Cookies.set("loggedIn", "false");
+      console.error("Error during login:", error);
     }
   };
 
