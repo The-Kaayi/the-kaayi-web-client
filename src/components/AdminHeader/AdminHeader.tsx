@@ -19,7 +19,7 @@ const userDropdownItems: MenuProps["items"] = [
   },
   {
     key: "2",
-    label: <Link href="/admin-panel/logout">Logout</Link>,
+    label: "Logout",
     icon: "",
   },
 ];
@@ -50,9 +50,9 @@ const AdminHeader: React.FC = () => {
           alt="Notification"
         />
         <Dropdown
-          className={styles.userDropdownItems}
+          className={styles.userDropdown}
           menu={{ items: userDropdownItems }}
-          overlayClassName={styles.userDropdown}
+          overlayClassName={styles.userDropdownMenu}
         >
           <div>
             <div className={styles.userImg}>

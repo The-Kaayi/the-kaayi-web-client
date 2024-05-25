@@ -42,10 +42,12 @@
       height: 30px;
     }
 
-    .userDropdownItems {
+    .userDropdown {
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
+
 
       .userImg {
         width: 30px;
@@ -78,7 +80,7 @@
   }
 }
 
-.userDropdown {
+.userDropdownMenu {
   :global .ant-dropdown-menu {
     padding: 5px !important;
     border-radius: 0 !important;

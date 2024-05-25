@@ -46,7 +46,7 @@ const Sidebar: React.FC<{}> = () => {
   const localizedSidebarBottomItems = [
     {
       label: "Settings",
-      key: "settings",
+      key: "profile",
       icon: <Image src={settingsIcon} alt="Settings Icon" width={25} />,
     },
   ];

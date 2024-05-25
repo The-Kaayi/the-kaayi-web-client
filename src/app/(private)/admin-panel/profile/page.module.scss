@@ -1,0 +1,31 @@
+@import "src/styles/abstracts/variables";
+
+.profile {
+  min-height: calc(100vh - 75px);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+  gap: 40px;
+
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .title {
+      font-size: $font-size-7;
+      font-weight: 600;
+    }
+
+    .backBtn {
+      display: flex;
+      align-items: center;
+      color: gray;
+
+      .backIcon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
