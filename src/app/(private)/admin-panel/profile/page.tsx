@@ -3,13 +3,14 @@ import Image from "next/image";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import arrowIcon from "../../../../../public/images/Missions/arrow-right.svg";
+import Profile from "@/components/Profile/Profile";
 import styles from "./page.module.scss";
 
 const tabsItems: TabsProps["items"] = [
   {
     key: "1",
     label: `Profile`,
-    children: "Profile Details",
+    children: <Profile />,
   },
   {
     key: "2",
@@ -18,20 +19,13 @@ const tabsItems: TabsProps["items"] = [
   },
 ];
 
-const Profile: React.FC = () => {
+const ProfileSettings: React.FC = () => {
   return (
     <div className={styles.profile}>
-      <div className={styles.titleContainer}>
-        <h2 className={styles.title}>Profile & Settings</h2>
-        <Link className={styles.backBtn} href="/admin-panel">
-          <Image className={styles.backIcon} src={arrowIcon} alt="Arrow Icon" />
-          Go Back
-        </Link>
-      </div>
-
-      <Tabs defaultActiveKey="1"  items={tabsItems} />
+      <h2 className={styles.title}>Profile & Settings</h2>
+      <Tabs className={styles.tabs} defaultActiveKey="1" items={tabsItems} />
     </div>
   );
 };
 
-export default Profile;
+export default ProfileSettings;

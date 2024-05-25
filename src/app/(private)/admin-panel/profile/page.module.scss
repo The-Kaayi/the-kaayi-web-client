@@ -5,26 +5,42 @@
   display: flex;
   flex-direction: column;
   padding: 40px 30px;
-  gap: 40px;
+  gap: 20px;
 
-  .titleContainer {
+  .title {
+    font-size: $font-size-7;
+    font-weight: 600;
+  }
+
+  :global(.ant-tabs) {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 30px;
 
-    .title {
-      font-size: $font-size-7;
-      font-weight: 600;
-    }
+    :global(.ant-tabs-nav) {
+      align-self: flex-start;
+      :global(.ant-tabs-nav-operations) {
+        display: none;
+      }
 
-    .backBtn {
-      display: flex;
-      align-items: center;
-      color: gray;
+      :global(.ant-tabs-ink-bar) {
+        background-color: $primary-color;
+      }
 
-      .backIcon {
-        width: 20px;
-        height: 20px;
+      :global(.ant-tabs-tab) {
+        padding: 0px;
+        margin: 0;
+
+        :global(.ant-tabs-tab-btn) {
+          color: $black;
+          padding: 10px 20px;
+          font-family: $primary-font;
+          font-size: $font-size-3;
+          font-weight: 500;
+          line-height: normal;
+          border-bottom: 2px solid $white !important;
+        }
       }
     }
   }
