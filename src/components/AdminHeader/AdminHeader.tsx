@@ -39,7 +39,7 @@ const AdminHeader: React.FC = () => {
       if (user) {
         const q = query(
           collection(db, "users"),
-          where("email", "==", user.email)
+          where("userID", "==", user.uid)
         );
         const querySnapshot = await getDocs(q);
 

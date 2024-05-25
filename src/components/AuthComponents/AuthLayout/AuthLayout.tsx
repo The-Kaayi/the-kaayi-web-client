@@ -43,6 +43,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
       console.log("Signup Response:", res);
       if (res) {
         const userData = {
+          userID: res.user.uid,
           firstName: formData["firstName"],
           lastName: formData["lastName"],
           email: formData["email"],

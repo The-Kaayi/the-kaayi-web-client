@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
       if (user) {
         const q = query(
           collection(db, "users"),
-          where("email", "==", user.email)
+          where("userID", "==", user.uid)
         );
         const querySnapshot = await getDocs(q);
 
@@ -53,7 +53,7 @@ const Profile: React.FC = () => {
         <p className={styles.userName}>
           {userInfo?.firstName} {userInfo?.lastName}
         </p>
-        <p className={styles.userEmail}>{user?.email}</p>
+        <p className={styles.userEmail}>{userInfo?.email}</p>
       </div>
     </div>
   );
