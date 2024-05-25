@@ -42,9 +42,11 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
       );
       console.log("Signup Response:", res);
       if (res) {
-        const userData = { ...formData };
-        delete userData["password"];
-        delete userData["confirmPassword"];
+        const userData = {
+          firstName: formData["firstName"],
+          lastName: formData["lastName"],
+          email: formData["email"],
+        };
 
         await addDoc(collection(db, "users"), userData);
 
