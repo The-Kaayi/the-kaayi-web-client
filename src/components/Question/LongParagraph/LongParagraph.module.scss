@@ -1,0 +1,36 @@
+@import "src/styles/abstracts/variables";
+
+.longParagraph {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  width: 50%;
+
+  .question {
+    font-size: $font-size-3;
+    font-weight: 400;
+    border-bottom: solid $light-border 1px;
+    outline: none;
+    padding: 10px;
+  }
+
+  .answerBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .answer {
+      font-size: $font-size-3;
+      font-weight: 400;
+      border: none;
+      outline: none;
+      width: 100%;
+      border: solid $light-border 1px;
+      outline: none;
+      padding: 10px;
+      border-radius: 5px;
+      resize: none;
+    }
+  }
+}
