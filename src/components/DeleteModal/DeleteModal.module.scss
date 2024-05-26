@@ -1,0 +1,90 @@
+@import "@/styles/abstracts/variables.scss";
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 400px;
+
+  .modalHeader {
+    .titleContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: $font-size-7;
+      color: $error-red;
+
+      .warningIcon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
+  .modalBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .modalText {
+      font-size: $font-size-2;
+      text-align: justify;
+      color: gray;
+    }
+
+    .modalInput {
+      width: 100%;
+      padding: 10px;
+      font-size: $font-size-2;
+      border: 1px solid $error-red;
+      border-radius: 5px;
+      outline: none;
+      color: $error-red;
+      font-weight: 600;
+    }
+  }
+
+  .modalFooter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+
+    .deleteBtn {
+      width: 100%;
+      background-color: $error-red;
+      color: $white;
+      font-size: $font-size-3;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: gray;
+      }
+    }
+
+    .cancelBtn {
+      width: 100%;
+      background-color: $white;
+      color: $primary-color;
+      font-size: $font-size-3;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid $primary-color;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+  }
+}
