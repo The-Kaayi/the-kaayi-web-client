@@ -17,7 +17,7 @@ const Notification = ({ title, type, description }: NotificationType) => {
         </div>
       </div>
     ),
-    duration: 3,
+    duration: 2,
     placement: "top",
     className: styles.notification,
     closeIcon: false,

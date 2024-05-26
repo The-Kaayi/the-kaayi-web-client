@@ -5,7 +5,7 @@ import MissionCard from "@/components/Missions/MissonCard/MissionCard";
 import styles from "./page.module.scss";
 
 const Missions: React.FC = () => {
-  const missions = Array.from({ length: 0 }, (_, i) => ({
+  const missions = Array.from({ length: 7 }, (_, i) => ({
     uuid: (i + 1).toString(),
   }));
 
