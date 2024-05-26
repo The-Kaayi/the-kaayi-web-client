@@ -4,7 +4,12 @@ export function middleware(request: NextRequest) {
   const loggedIn = request.cookies.get("loggedIn")?.value === "true";
   const protectedRoutes: string[] = ["/admin-panel"];
 
-  const authRoutes = ["/login", "/signup", "/forgot-password", "/reset-password"];
+  const authRoutes = [
+    "/login",
+    "/signup",
+    "/forgot-password",
+    "/reset-password",
+  ];
 
   const loginUrl = process.env.NEXT_AUTH_LOGIN_URL;
 
@@ -16,9 +21,7 @@ export function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith(route)
   );
 
-  const isRootPath: boolean = request.nextUrl.pathname === "/";
-
-  if ((isProtectedRoute || isRootPath) && !loggedIn) {
+  if (isProtectedRoute && !loggedIn) {
     return NextResponse.redirect(`${loginUrl}/login`);
   }
 
