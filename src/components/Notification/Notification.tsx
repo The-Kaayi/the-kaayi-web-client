@@ -19,6 +19,8 @@ const Notification = ({ title, type, description }: NotificationType) => {
     ),
     duration: 3,
     placement: "top",
+    className: styles.notification,
+    closeIcon: false,
   });
 };
 

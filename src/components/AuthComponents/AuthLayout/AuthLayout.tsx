@@ -11,6 +11,7 @@ import {
 import { auth, db } from "@/firebase/config";
 import { collection, addDoc } from "firebase/firestore";
 import authActionsData from "@/data/authActionsData";
+import Notification from "@/components/Notification/Notification";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
 
@@ -44,18 +45,17 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
 
   const handleSignup = async () => {
     try {
-      console.log(
-        "Email:",
-        formData["email"],
-        "Password:",
-        formData["password"]
-      );
       const res = await createUserWithEmailAndPassword(
         formData["email"],
         formData["password"]
       );
-      console.log("Signup Response:", res);
-      if (res) {
+      if (error?.message === "Firebase: Error (auth/email-already-in-use).") {
+        Notification({
+          type: "error",
+          title: "Email already in use",
+          description: "Please use a different email address.",
+        });
+      } else if (res) {
         const userData = {
           userID: res.user.uid,
           firstName: formData["firstName"],
@@ -73,18 +73,22 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   };
 
   const handleLogin = async () => {
-    console.log("Email:", formData["email"], "Password:", formData["password"]);
     const res = await signInWithEmailAndPassword(
       formData["email"],
       formData["password"]
     );
-    console.log("Login Response:", res);
+
     if (res) {
       Cookies.set("loggedIn", "true");
+      console.log(res);
       router.push("/admin-panel");
     } else {
       Cookies.set("loggedIn", "false");
-      console.error("Error during login:", error);
+      Notification({
+        type: "error",
+        title: "Invalid email or password",
+        description: "Please check your email and password and try again.",
+      });
     }
   };
 
@@ -139,7 +143,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
               </div>
             ))}
 
-            {authAction === "signup" && (
+            {/* {authAction === "signup" && (
               <div className={styles.termsCheckboxContainer}>
                 <input
                   className={styles.termsCheckbox}
@@ -161,7 +165,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   </Link>
                 </label>
               </div>
-            )}
+            )} */}
 
             {authAction === "login" && (
               <Link
