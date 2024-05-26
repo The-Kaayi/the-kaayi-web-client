@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import Notification from "@/components/Notification/Notification";
 import MissionCard from "@/components/Missions/MissonCard/MissionCard";
 import styles from "./page.module.scss";
 
@@ -13,16 +15,25 @@ const Missions: React.FC = () => {
     ));
   };
 
+  const onBtnClick = () => {
+    Notification({
+      type: "success",
+      title: "Mission created successfully",
+      description: "Your mission was created successfully.",
+    });
+  };
+
   return (
     <div className={styles.missions}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>Missions</h2>
-        <Link
-          href="/admin-panel/missions/create-mission"
+        <button
+          onClick={onBtnClick}
+          // href="/admin-panel/missions/create-mission"
           className={styles.addBtn}
         >
           + Add a new mission
-        </Link>
+        </button>
       </div>
       <div className={styles.content}>
         {missions.length > 0 ? (
