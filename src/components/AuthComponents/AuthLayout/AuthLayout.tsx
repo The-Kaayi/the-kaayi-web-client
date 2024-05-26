@@ -1,87 +1,112 @@
-import { useState, ChangeEvent } from "react";
+"use client";
+import { useState, ChangeEvent, FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthTypes } from "@/types/auth";
-import Link from "next/link";
+import Cookies from "js-cookie";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
+import { auth, db } from "@/firebase/config";
+import { collection, addDoc } from "firebase/firestore";
+import authActionsData from "@/data/authActionsData";
+import Notification from "@/components/Notification/Notification";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
-
-const authActionsData = {
-  login: {
-    authTitle: "Welcome Back",
-    redirectText: "Don't have an account?",
-    redirectTo: "/signup",
-    formFields: [
-      { name: "email", label: "Email", type: "email", required: true },
-      { name: "password", label: "Password", type: "password", required: true },
-    ],
-    submitButtonLabel: "Login",
-  },
-  signup: {
-    authTitle: "Create Account",
-    redirectText: "Already have an account?",
-    redirectTo: "/login",
-    formFields: [
-      { name: "firstName", label: "First Name", type: "text", required: true },
-      { name: "lastName", label: "Last Name", type: "text", required: true },
-      { name: "email", label: "Email", type: "email", required: true },
-      { name: "password", label: "Password", type: "password", required: true },
-      {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-      },
-    ],
-    submitButtonLabel: "Sign Up",
-  },
-  "forgot-password": {
-    authTitle: "Forgot your password?",
-    redirectText: "Remember your password?",
-    redirectTo: "/login",
-    formFields: [
-      { name: "email", label: "Email", type: "email", required: true },
-    ],
-    submitButtonLabel: "Send Reset Link",
-  },
-  "reset-password": {
-    authTitle: "Reset your password.",
-    redirectText: "Remember your password?",
-    redirectTo: "/login",
-    formFields: [
-      {
-        name: "password",
-        label: "New Password",
-        type: "password",
-        required: true,
-      },
-      {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-      },
-    ],
-    submitButtonLabel: "Reset Password",
-  },
-};
 
 const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   const { authTitle, formFields, submitButtonLabel } =
     authActionsData[authAction];
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const validateFields = () => {
+    const newErrors: { [key: string]: string } = {};
+    formFields.forEach((field) => {
+      if (!formData[field.name]) {
+        newErrors[field.name] = `${field.label} is required`;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSignup = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(
+        formData["email"],
+        formData["password"]
+      );
+      if (error?.message === "Firebase: Error (auth/email-already-in-use).") {
+        Notification({
+          type: "error",
+          title: "Email already in use",
+          description: "Please use a different email address.",
+        });
+      } else if (res) {
+        const userData = {
+          userID: res.user.uid,
+          firstName: formData["firstName"],
+          lastName: formData["lastName"],
+          email: formData["email"],
+        };
+
+        await addDoc(collection(db, "users"), userData);
+
+        router.push("/login");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+  };
+
+  const handleLogin = async () => {
+    const res = await signInWithEmailAndPassword(
+      formData["email"],
+      formData["password"]
+    );
+
+    if (res) {
+      Cookies.set("loggedIn", "true");
+      console.log(res);
+      router.push("/admin-panel");
+    } else {
+      Cookies.set("loggedIn", "false");
+      Notification({
+        type: "error",
+        title: "Invalid email or password",
+        description: "Please check your email and password and try again.",
+      });
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    router.push(authAction === "signup" ? "/login" : "/admin-panel");
-    
+    if (!validateFields()) return;
+
+    switch (authAction) {
+      case "signup":
+        await handleSignup();
+        break;
+      case "login":
+        await handleLogin();
+        break;
+      default:
+        console.error("Unsupported authAction:", authAction);
+        return;
+    }
   };
 
   return (
@@ -109,21 +134,22 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   type={field.type}
                   id={field.name}
                   name={field.name}
-                  required={field.required}
                   onChange={handleChange}
                   placeholder={field.label}
                 />
+                {errors[field.name] && (
+                  <p className={styles.errorText}>{errors[field.name]}</p>
+                )}
               </div>
             ))}
 
-            {authAction === "signup" && (
+            {/* {authAction === "signup" && (
               <div className={styles.termsCheckboxContainer}>
                 <input
                   className={styles.termsCheckbox}
                   type="checkbox"
                   id="acceptTerms"
                   name="acceptTerms"
-                  required
                 />
                 <label
                   className={styles.termsCheckboxLabel}
@@ -131,7 +157,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                 >
                   I accept the{" "}
                   <Link href="/terms-of-service" className={styles.link}>
-                    Terms of Tervice{" "}
+                    Terms of Service{" "}
                   </Link>
                   and{" "}
                   <Link href="/privacy-policy" className={styles.link}>
@@ -139,7 +165,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   </Link>
                 </label>
               </div>
-            )}
+            )} */}
 
             {authAction === "login" && (
               <Link

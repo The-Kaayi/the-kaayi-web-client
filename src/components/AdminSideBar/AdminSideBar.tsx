@@ -36,17 +36,12 @@ const Sidebar: React.FC<{}> = () => {
       key: "missions",
       icon: <Image src={missionsIcon} alt="Missions Icon" width={25} />,
     },
-    {
-      label: "Rewards",
-      key: "rewards",
-      icon: <Image src={rewardsIcon} alt="Rewards Icon" width={25} />,
-    },
   ];
 
   const localizedSidebarBottomItems = [
     {
       label: "Settings",
-      key: "settings",
+      key: "profile",
       icon: <Image src={settingsIcon} alt="Settings Icon" width={25} />,
     },
   ];
