@@ -159,6 +159,13 @@
         &:hover {
           background-color: $primary-color-700;
         }
+
+        &:disabled {
+          opacity: 0.5;
+          background-color: gray;
+          cursor: not-allowed;
+          border: 1px solid gray;
+        }
       }
     }
   }

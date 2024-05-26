@@ -1,10 +1,39 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
+import { Select } from "antd";
 import FileUpload from "@/components/FileUpload/FileUpload";
+import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph";
+import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
+import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
 const CreateMission: React.FC = () => {
+  const [questions, setQuestions] = useState([{ id: 1, type: "short" }]);
+
+  const handleSelectChange = (value: string, id: number) => {
+    setQuestions(
+      questions.map((q) => (q.id === id ? { ...q, type: value } : q))
+    );
+  };
+
+  const addQuestion = () => {
+    const newQuestion = {
+      id: questions.length + 1,
+      type: "short",
+    };
+    setQuestions([...questions, newQuestion]);
+  };
+
+  const renderQuestionType = (type: string) => {
+    if (type === "short") {
+      return <ShortParagraph />;
+    } else if (type === "long") {
+      return <LongParagraph />;
+    }
+  };
+
   return (
     <div className={styles.createMission}>
       <div className={styles.titleContainer}>
@@ -64,9 +93,31 @@ const CreateMission: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <div className={styles.questionare}>
+          {questions.map((question, index) => (
+            <div key={question.id} className={styles.question}>
+              <Select
+                defaultValue={question.type}
+                style={{ width: 120 }}
+                onChange={(value) => handleSelectChange(value, question.id)}
+                options={[
+                  { value: "short", label: "Short Paragraph" },
+                  { value: "long", label: "Long Paragraph" },
+                ]}
+              />
+              {renderQuestionType(question.type)}
+            </div>
+          ))}
+          <button className={styles.addBtn} onClick={addQuestion}>
+            Add Question
+          </button>
+        </div>
         <div className={styles.btnContainer}>
           <button className={styles.saveBtn}>Save</button>
-          <button className={styles.postBtn}>Post</button>
+          <button className={styles.postBtn} disabled>
+            Post
+          </button>
         </div>
       </div>
     </div>
