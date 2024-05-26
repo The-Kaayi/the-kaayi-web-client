@@ -7,6 +7,7 @@ import FileUpload from "@/components/FileUpload/FileUpload";
 import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph";
 import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
+import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import styles from "./page.module.scss";
 
 const CreateMission: React.FC = () => {
@@ -26,11 +27,26 @@ const CreateMission: React.FC = () => {
     setQuestions([...questions, newQuestion]);
   };
 
+  const removeQuestion = (id: number) => {
+    setQuestions(questions.filter((q) => q.id !== id));
+  };
+
+  const questionOptions = [
+    { value: "short", label: "Short Paragraph" },
+    { value: "long", label: "Long Paragraph" },
+    { value: "MCQ", label: "Multiple Choice" },
+    { value: "MSQ", label: "Multiple Select" },
+  ];
+
   const renderQuestionType = (type: string) => {
     if (type === "short") {
       return <ShortParagraph />;
     } else if (type === "long") {
       return <LongParagraph />;
+    } else if (type === "MCQ") {
+      return <div>MCQ</div>;
+    } else if (type === "MSQ") {
+      return <div>MSQ</div>;
     }
   };
 
@@ -101,18 +117,22 @@ const CreateMission: React.FC = () => {
                 defaultValue={question.type}
                 style={{ width: 120 }}
                 onChange={(value) => handleSelectChange(value, question.id)}
-                options={[
-                  { value: "short", label: "Short Paragraph" },
-                  { value: "long", label: "Long Paragraph" },
-                ]}
+                options={questionOptions}
               />
               {renderQuestionType(question.type)}
+              <Image
+                className={styles.deleteIcon}
+                onClick={() => removeQuestion(question.id)}
+                src={deleteIcon}
+                alt="Delete Icon"
+              />
             </div>
           ))}
           <button className={styles.addBtn} onClick={addQuestion}>
-            Add Question
+            + Add Question
           </button>
         </div>
+
         <div className={styles.btnContainer}>
           <button className={styles.saveBtn}>Save</button>
           <button className={styles.postBtn} disabled>
