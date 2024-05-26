@@ -45,6 +45,15 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
 
   const handleSignup = async () => {
     try {
+      if (formData["password"] !== formData["confirmPassword"]) {
+        Notification({
+          type: "error",
+          title: "Passwords do not match",
+          description: "Please ensure that both password fields match.",
+        });
+        return;
+      }
+
       const res = await createUserWithEmailAndPassword(
         formData["email"],
         formData["password"]
