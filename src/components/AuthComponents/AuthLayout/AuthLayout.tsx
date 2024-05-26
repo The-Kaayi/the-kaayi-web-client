@@ -13,12 +13,12 @@ import { collection, addDoc } from "firebase/firestore";
 import authActionsData from "@/data/authActionsData";
 import AppDetails from "@/components/AuthComponents/AppDetails/AppDetails";
 import styles from "./AuthLayout.module.scss";
-import { cookies } from "next/headers";
 
 const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
   const { authTitle, formFields, submitButtonLabel } =
     authActionsData[authAction];
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
@@ -28,6 +28,18 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validateFields = () => {
+    const newErrors: { [key: string]: string } = {};
+    formFields.forEach((field) => {
+      if (!formData[field.name]) {
+        newErrors[field.name] = `${field.label} is required`;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSignup = async () => {
@@ -78,6 +90,7 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!validateFields()) return;
 
     switch (authAction) {
       case "signup":
@@ -117,10 +130,12 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   type={field.type}
                   id={field.name}
                   name={field.name}
-                  required={field.required}
                   onChange={handleChange}
                   placeholder={field.label}
                 />
+                {errors[field.name] && (
+                  <p className={styles.errorText}>{errors[field.name]}</p>
+                )}
               </div>
             ))}
 
@@ -131,7 +146,6 @@ const AuthLayout: React.FC<{ authAction: AuthTypes }> = ({ authAction }) => {
                   type="checkbox"
                   id="acceptTerms"
                   name="acceptTerms"
-                  required
                 />
                 <label
                   className={styles.termsCheckboxLabel}
