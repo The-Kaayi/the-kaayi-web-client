@@ -16,10 +16,51 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div>
-      <button className={styles.deleteBtn} onClick={onDeleteClick}>
-        Delete account
-      </button>
+    <div className={styles.settings}>
+      <div className={styles.subContainer}>
+        <h3 className={styles.title}>Change Password</h3>
+        <div className={styles.content}>
+          <p className={styles.description}>
+            To ensure the security of your account, it is recommended to change
+            your password regularly. Make sure your new password is strong,
+            combining uppercase and lowercase letters, numbers, and special
+            characters. Please do not share your password with anyone.
+          </p>
+          <div className={styles.passwordForm}>
+            <input
+              className={styles.passwordInput}
+              type="password"
+              placeholder="Current Password"
+            />
+            <input
+              className={styles.passwordInput}
+              type="password"
+              placeholder="New Password"
+            />
+            <input
+              className={styles.passwordInput}
+              type="password"
+              placeholder="Confirm New Password"
+            />
+            <button className={styles.saveBtn}>Save</button>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.subContainer}>
+        <h3 className={styles.title}>Delete Account</h3>
+        <div className={styles.content}>
+          <p className={styles.description}>
+            <span className={styles.warning}>Warning: </span>Deleting your account is permanent and cannot be undone.
+            All your data, including your profile, missions, history and preferences, will
+            be permanently erased. Please make sure you have downloaded any
+            important information before proceeding.
+          </p>
+          <button className={styles.deleteBtn} onClick={onDeleteClick}>
+            Delete account
+          </button>
+        </div>
+      </div>
 
       <DeleteModal
         title="Delete Account"
