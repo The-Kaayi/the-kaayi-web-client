@@ -1,0 +1,16 @@
+@import "src/styles/abstracts/variables";
+
+.ant-select-dropdown {
+  width: fit-content !important;
+  padding: 10px !important;
+
+  .ant-select-item-option:hover,
+  .ant-select-item-option-selected {
+    background: $select-green !important;
+    color: $dark-font  !important;
+  }
+
+  .ant-select-item-option {
+    font-size: 16px !important;
+  }
+}

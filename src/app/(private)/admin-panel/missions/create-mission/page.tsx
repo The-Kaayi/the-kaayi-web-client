@@ -114,6 +114,7 @@ const CreateMission: React.FC = () => {
           {questions.map((question, index) => (
             <div key={question.id} className={styles.question}>
               <Select
+                className={styles.questionSelect}
                 defaultValue={question.type}
                 style={{ width: 120 }}
                 onChange={(value) => handleSelectChange(value, question.id)}
