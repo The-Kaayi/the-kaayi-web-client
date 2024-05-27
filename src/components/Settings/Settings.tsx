@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import DeleteModal from "../DeleteModal/DeleteModal";
+// import DeleteModal from "../DeleteModal/DeleteModal";
 import styles from "./Settings.module.scss";
 
 const Settings: React.FC = () => {
@@ -62,13 +62,13 @@ const Settings: React.FC = () => {
         </div>
       </div>
 
-      <DeleteModal
+      {/* <DeleteModal
         title="Delete Account"
         content="Are you sure you want to delete your account? All the data associated with your account will be permanently deleted. This action cannot be undone."
         onConfirm={onConfirmDelete}
         onCancel={() => setOpen(false)}
         open={open}
-      />
+      /> */}
     </div>
   );
 };

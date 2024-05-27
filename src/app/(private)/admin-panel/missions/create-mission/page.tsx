@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Select } from "antd";
+// import { Select } from "antd";
 import FileUpload from "@/components/FileUpload/FileUpload";
 import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph";
 import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
@@ -113,13 +113,13 @@ const CreateMission: React.FC = () => {
         <div className={styles.questionare}>
           {questions.map((question, index) => (
             <div key={question.id} className={styles.question}>
-              <Select
+              {/* <Select
                 className={styles.questionSelect}
                 defaultValue={question.type}
                 style={{ width: 120 }}
                 onChange={(value) => handleSelectChange(value, question.id)}
                 options={questionOptions}
-              />
+              /> */}
               {renderQuestionType(question.type)}
               <Image
                 className={styles.deleteIcon}
