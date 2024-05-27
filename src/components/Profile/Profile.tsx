@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
-import userAvatar from "../../../public/images/Profile/user-avatar.svg";
+import userAvatar from "../../../public/images/Profile/users-avatar.svg";
 import editIcon from "../../../public/images/MissionCard/edit.svg";
 import styles from "./Profile.module.scss";
 
