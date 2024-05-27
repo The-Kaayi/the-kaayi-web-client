@@ -1,7 +1,6 @@
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import Profile from "@/components/Profile/Profile";
-import Settings from "@/components/Settings/Settings";
 import styles from "./page.module.scss";
 
 const tabsItems: TabsProps["items"] = [
@@ -13,7 +12,7 @@ const tabsItems: TabsProps["items"] = [
   {
     key: "2",
     label: `Settings`,
-    children: <Settings />,
+    children: "Password Settings",
   },
 ];
 
