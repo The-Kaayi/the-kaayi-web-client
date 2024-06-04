@@ -8,6 +8,7 @@ import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph"
 import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
+import CustomSelect from "@/components/CustomSelect/CustomSelect";
 import styles from "./page.module.scss";
 
 const CreateMission: React.FC = () => {
@@ -113,13 +114,11 @@ const CreateMission: React.FC = () => {
         <div className={styles.questionare}>
           {questions.map((question, index) => (
             <div key={question.id} className={styles.question}>
-              {/* <Select
-                className={styles.questionSelect}
-                defaultValue={question.type}
-                style={{ width: 120 }}
-                onChange={(value) => handleSelectChange(value, question.id)}
+              <CustomSelect
                 options={questionOptions}
-              /> */}
+                defaultValue={question.type}
+                onChange={(value) => handleSelectChange(value, question.id)}
+              />
               {renderQuestionType(question.type)}
               <Image
                 className={styles.deleteIcon}
