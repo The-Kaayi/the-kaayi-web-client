@@ -159,6 +159,46 @@
         &:hover {
           background-color: $primary-color-700;
         }
+
+        &:disabled {
+          opacity: 0.5;
+          background-color: gray;
+          cursor: not-allowed;
+          border: 1px solid gray;
+        }
+      }
+    }
+
+    .questionare {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .question {
+        display: flex;
+        gap: 50px;
+
+        .deleteIcon {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+        }
+      }
+
+      .addBtn {
+        font-size: $font-size-2;
+        font-weight: 400;
+        color: $primary-color;
+        background-color: $white;
+        border: 1px solid $primary-color;
+        border-radius: 5px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+        align-self: center;
+
+        &:hover {
+          scale: 1.03;
+        }
       }
     }
   }

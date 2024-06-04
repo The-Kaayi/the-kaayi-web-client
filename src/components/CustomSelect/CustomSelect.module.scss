@@ -1,0 +1,58 @@
+.selectContainer {
+    position: relative;
+    width: 120px;
+  }
+  
+  .selectHeader {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .selectList {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    background: white;
+    z-index: 10;
+    animation: openList 0.3s ease-in-out;
+  }
+  
+  .selectOption {
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+  
+  @keyframes openList {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes closeList {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+  
+  .open {
+    animation: openList 0.3s ease-in-out forwards;
+  }
+  
+  .close {
+    animation: closeList 0.3s ease-in-out forwards;
+  }
+  
