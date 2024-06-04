@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import styles from "./MultipleChoice.module.scss";
 
 const MultipleChoice: React.FC = () => {
@@ -37,24 +37,29 @@ const MultipleChoice: React.FC = () => {
         {answers.map((answer, index) => (
           <div key={index} className={styles.answerOption}>
             <input
-              className={styles.answer}
+              className={styles.answerSelect}
               type="radio"
               name="multipleChoice"
+              id={`option-${index}`}
               checked={selectedAnswer === index}
               onChange={() => handleAnswerSelect(index)}
             />
+            <label
+              htmlFor={`option-${index}`}
+              className={styles.customCheckbox}
+            ></label>
             <input
               className={styles.answerText}
               type="text"
               value={answer}
               onChange={(e) => handleAnswerChange(index, e.target.value)}
-              placeholder={`Answer ${index + 1}`}
+              placeholder={`Option ${index + 1}`}
             />
           </div>
         ))}
       </div>
       <button className={styles.addButton} onClick={addAnswer}>
-        Add Option
+        + Add Option
       </button>
     </div>
   );

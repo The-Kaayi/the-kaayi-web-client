@@ -3,26 +3,26 @@ import styles from "./MultipleSelect.module.scss";
 
 const MultipleSelect: React.FC = () => {
   const [question, setQuestion] = useState("");
-  const [options, setOptions] = useState([{ text: "", checked: false }]);
+  const [answers, setAnswers] = useState([{ text: "", checked: false }]);
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
   };
 
   const handleOptionChange = (index: number, value: string) => {
-    const newOptions = [...options];
+    const newOptions = [...answers];
     newOptions[index].text = value;
-    setOptions(newOptions);
+    setAnswers(newOptions);
   };
 
   const handleCheckboxChange = (index: number) => {
-    const newOptions = [...options];
+    const newOptions = [...answers];
     newOptions[index].checked = !newOptions[index].checked;
-    setOptions(newOptions);
+    setAnswers(newOptions);
   };
 
   const addOption = () => {
-    setOptions([...options, { text: "", checked: false }]);
+    setAnswers([...answers, { text: "", checked: false }]);
   };
 
   return (
@@ -34,18 +34,22 @@ const MultipleSelect: React.FC = () => {
         onChange={handleQuestionChange}
         placeholder="Question"
       />
-      <div className={styles.options}>
-        {options.map((option, index) => (
-          <div key={index} className={styles.option}>
+      <div className={styles.answerBox}>
+        {answers.map((option, index) => (
+          <div key={index} className={styles.answerOption}>
             <input
-              className={styles.checkbox}
+              className={styles.answerSelect}
               type="checkbox"
               id={`option-${index}`}
               checked={option.checked}
               onChange={() => handleCheckboxChange(index)}
             />
+            <label
+              htmlFor={`option-${index}`}
+              className={styles.customCheckbox}
+            ></label>
             <input
-              className={styles.optionText}
+              className={styles.answerText}
               type="text"
               value={option.text}
               onChange={(e) => handleOptionChange(index, e.target.value)}
@@ -55,7 +59,7 @@ const MultipleSelect: React.FC = () => {
         ))}
       </div>
       <button className={styles.addButton} onClick={addOption}>
-        Add Option
+       + Add Option
       </button>
     </div>
   );
