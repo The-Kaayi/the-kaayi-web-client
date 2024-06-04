@@ -7,6 +7,8 @@ import FileUpload from "@/components/FileUpload/FileUpload";
 import CustomSelect from "@/components/CustomSelect/CustomSelect";
 import ShortParagraph from "@/components/Questions/ShortParagraph/ShortParagraph";
 import LongParagraph from "@/components/Questions/LongParagraph/LongParagraph";
+import MultipleChoice from "@/components/Questions/MultilpleChoice/MultipleChoice";
+import MultipleSelect from "@/components/Questions/MultipleSelect/MultipleSelect";
 import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
@@ -45,9 +47,9 @@ const CreateMission: React.FC = () => {
     } else if (type === "long") {
       return <LongParagraph />;
     } else if (type === "MCQ") {
-      return <div>MCQ</div>;
+      return <MultipleChoice />;
     } else if (type === "MSQ") {
-      return <div>MSQ</div>;
+      return <MultipleSelect />;
     }
   };
 
