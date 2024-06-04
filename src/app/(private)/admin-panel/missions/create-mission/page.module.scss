@@ -176,32 +176,7 @@
 
       .question {
         display: flex;
-        // align-items: center;
         gap: 50px;
-
-        .questionSelect {
-          &:global(.ant-select) {
-            width: 200px !important;
-          }
-
-          :global(.ant-select-selector) {
-            border: none;
-            font-size: $font-size-3;
-            font-weight: 500;
-            line-height: 1px;
-            padding: 24px 20px;
-            border-radius: 8px;
-            display: flex;
-            gap: 5px;
-            background-color: $select-green;
-          }
-
-          :global(.ant-select-arrow) {
-            color: $dark-font;
-            font-size: $font-size-1;
-            margin-top: 2px;
-          }
-        }
 
         .deleteIcon {
           width: 30px;

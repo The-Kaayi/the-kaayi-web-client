@@ -1,13 +1,14 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FileUpload from "@/components/FileUpload/FileUpload";
-import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph";
-import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
-import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
-import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import CustomSelect from "@/components/CustomSelect/CustomSelect";
+import ShortParagraph from "@/components/Questions/ShortParagraph/ShortParagraph";
+import LongParagraph from "@/components/Questions/LongParagraph/LongParagraph";
+import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
+import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
 const CreateMission: React.FC = () => {
@@ -111,7 +112,7 @@ const CreateMission: React.FC = () => {
         </div>
 
         <div className={styles.questionare}>
-          {questions.map((question, index) => (
+          {questions.map((question: any, index: number) => (
             <div key={question.id} className={styles.question}>
               <CustomSelect
                 options={questionOptions}
@@ -134,9 +135,7 @@ const CreateMission: React.FC = () => {
 
         <div className={styles.btnContainer}>
           <button className={styles.saveBtn}>Save</button>
-          <button className={styles.postBtn} disabled>
-            Post
-          </button>
+          <button className={styles.postBtn}>Post</button>
         </div>
       </div>
     </div>

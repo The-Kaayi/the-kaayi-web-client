@@ -48,6 +48,7 @@
       gap: 10px;
       cursor: pointer;
 
+
       .userImg {
         width: 30px;
         height: 30px;
@@ -96,7 +97,7 @@
       border-radius: 5px;
 
       &:hover {
-        background-color: $select-green !important;
+        background-color: #d8e3dc !important;
         transition: all 0s ease-in-out !important;
 
         .ant-dropdown-menu-item-icon path {
