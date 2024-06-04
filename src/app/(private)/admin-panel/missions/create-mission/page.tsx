@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import { Select } from "antd";
 import FileUpload from "@/components/FileUpload/FileUpload";
 import ShortParagraph from "@/components/Question/ShortParagraph/ShortParagraph";
 import LongParagraph from "@/components/Question/LongParagraph/LongParagraph";
