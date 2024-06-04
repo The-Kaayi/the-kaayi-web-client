@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import downArrow from "../../../public/images/CustomSelect/down-arrow.svg";
 import styles from "./CustomSelect.module.scss";
 
 interface Option {
@@ -47,6 +49,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     <div className={styles.selectContainer} ref={selectRef}>
       <div className={styles.selectHeader} onClick={() => setIsOpen(!isOpen)}>
         {options.find((option) => option.value === selectedValue)?.label}
+        <Image className={styles.selectArrow} src={downArrow} alt="down arrow" />
       </div>
       <div
         className={`${styles.selectList} ${

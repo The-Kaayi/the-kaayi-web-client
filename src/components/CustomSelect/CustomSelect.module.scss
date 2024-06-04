@@ -1,58 +1,79 @@
+@import "src/styles/abstracts/variables";
+
 .selectContainer {
-    position: relative;
-    width: 120px;
-  }
-  
-  .selectHeader {
-    padding: 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  .selectList {
+  position: relative;
+  width: 120px;
+}
+
+.selectHeader {
+  padding: 10px;
+  border: 1px solid $light-border;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: $font-size-2;
+  position: relative;
+
+  .selectArrow {
     position: absolute;
-    width: 100%;
-    border: 1px solid #ccc;
-    background: white;
-    z-index: 10;
-    animation: openList 0.3s ease-in-out;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    transition: all 0.2s ease;
   }
-  
-  .selectOption {
-    padding: 10px;
-    cursor: pointer;
-    &:hover {
-      background-color: #f0f0f0;
-    }
+}
+
+.selectList {
+  position: absolute;
+  top: 65px;
+  width: 100%;
+  border: 1px solid $light-border;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background: $white;
+  z-index: 10;
+  animation: openList 0.3s ease-in-out;
+  font-size: $font-size-2;
+}
+
+.selectOption {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #b2c6ba;
+    color: $white;
   }
-  
-  @keyframes openList {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+}
+
+@keyframes openList {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  @keyframes closeList {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .open {
-    animation: openList 0.3s ease-in-out forwards;
+}
+
+@keyframes closeList {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .close {
-    animation: closeList 0.3s ease-in-out forwards;
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
+}
+
+.open {
+  animation: openList 0.3s ease-in-out forwards;
+}
+
+.close {
+  animation: closeList 0.3s ease-in-out forwards;
+}
