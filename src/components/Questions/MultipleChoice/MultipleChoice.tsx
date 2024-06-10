@@ -1,29 +1,27 @@
-import React from "react";
+import { useState } from "react";
 import styles from "./MultipleChoice.module.scss";
 
-interface MultipleChoiceProps {
-  question: string;
-  answers: any;
-  selectedAnswer: number | null;
-  onQuestionChange: (question: string) => void;
-  onAnswerChange: (index: number, value: string) => void;
-  onAnswerSelect: (index: number) => void;
-  addAnswer: () => void;
-}
+const MultipleChoice: React.FC = () => {
+  const [question, setQuestion] = useState("");
+  const [answers, setAnswers] = useState([""]);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
-const MultipleChoice: React.FC<MultipleChoiceProps> = ({
-  question,
-  answers,
-  onQuestionChange,
-  onAnswerChange,
-  addAnswer,
-}) => {
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onQuestionChange(e.target.value);
+    setQuestion(e.target.value);
   };
 
-  const handleAnswerChange = (index: number, text: string) => {
-    onAnswerChange(index, { text, checked: answers[index].checked });
+  const handleAnswerChange = (index: number, value: string) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = value;
+    setAnswers(newAnswers);
+  };
+
+  const handleAnswerSelect = (index: number) => {
+    setSelectedAnswer(index);
+  };
+
+  const addAnswer = () => {
+    setAnswers([...answers, ""]);
   };
 
   return (
@@ -43,10 +41,8 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
               type="radio"
               name="multipleChoice"
               id={`option-${index}`}
-              checked={answer.checked}
-              onChange={() =>
-                onAnswerChange(index, { text: answer.text, checked: true })
-              }
+              checked={selectedAnswer === index}
+              onChange={() => handleAnswerSelect(index)}
             />
             <label
               htmlFor={`option-${index}`}
@@ -55,7 +51,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
             <input
               className={styles.answerText}
               type="text"
-              value={answer.text}
+              value={answer}
               onChange={(e) => handleAnswerChange(index, e.target.value)}
               placeholder={`Option ${index + 1}`}
             />
