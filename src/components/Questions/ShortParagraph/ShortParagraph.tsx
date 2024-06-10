@@ -6,7 +6,6 @@ const ShortParagraph: React.FC = () => {
 
   const questionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
-    console.log(question);
   };
 
   return (

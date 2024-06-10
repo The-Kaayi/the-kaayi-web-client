@@ -13,8 +13,42 @@ import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
+type missionType = {
+  shopDetails: {
+    shopName: string;
+    shopLocation: string;
+    shopLogo: string;
+  };
+  missionDetails: {
+    missionName: string;
+    missionDescription: string;
+    missionLogo: string;
+  };
+  questions: {
+    id: number;
+    type: string;
+    question: string;
+    answer?: string;
+    options?: string[];
+  }[];
+};
+
 const CreateMission: React.FC = () => {
   const [questions, setQuestions] = useState([{ id: 1, type: "short" }]);
+  const [questionData, setQuestionData] = useState<missionType[]>([]);
+  const [missionData, setMissionData] = useState<missionType>({
+    shopDetails: {
+      shopName: "",
+      shopLocation: "",
+      shopLogo: "",
+    },
+    missionDetails: {
+      missionName: "",
+      missionDescription: "",
+      missionLogo: "",
+    },
+    questions: [],
+  });
 
   const handleSelectChange = (value: string, id: number) => {
     setQuestions(
@@ -53,6 +87,28 @@ const CreateMission: React.FC = () => {
     }
   };
 
+  const handleSave = () => {
+    console.log("test", questions);
+
+    const newMission = {
+      shopDetails: {
+        shopName: "",
+        shopLocation: "",
+        shopLogo: "",
+      },
+      missionDetails: {
+        missionName: "",
+        missionDescription: "",
+        missionLogo: "",
+      },
+      questions: [],
+    };
+
+    setMissionData(newMission);
+
+    console.log("test 1", missionData);
+  };
+
   return (
     <div className={styles.createMission}>
       <div className={styles.titleContainer}>
@@ -73,6 +129,16 @@ const CreateMission: React.FC = () => {
                 className={styles.input}
                 type="text"
                 placeholder=" Enter the shop name"
+                value={missionData.shopDetails?.shopName}
+                onChange={(e) => {
+                  setMissionData({
+                    ...missionData,
+                    shopDetails: {
+                      ...missionData.shopDetails,
+                      shopName: e.target.value,
+                    },
+                  });
+                }}
               />
             </div>
 
@@ -82,6 +148,16 @@ const CreateMission: React.FC = () => {
                 className={styles.input}
                 type="text"
                 placeholder="Enter the shop location"
+                value={missionData.shopDetails?.shopLocation}
+                onChange={(e) => {
+                  setMissionData({
+                    ...missionData,
+                    shopDetails: {
+                      ...missionData.shopDetails,
+                      shopLocation: e.target.value,
+                    },
+                  });
+                }}
               />
             </div>
             <div className={styles.subContainer}>
@@ -100,6 +176,16 @@ const CreateMission: React.FC = () => {
                 className={styles.input}
                 type="text"
                 placeholder="Enter the mission title"
+                value={missionData.missionDetails?.missionName}
+                onChange={(e) => {
+                  setMissionData({
+                    ...missionData,
+                    missionDetails: {
+                      ...missionData.missionDetails,
+                      missionName: e.target.value,
+                    },
+                  });
+                }}
               />
             </div>
 
@@ -108,6 +194,16 @@ const CreateMission: React.FC = () => {
               <textarea
                 className={styles.textarea}
                 placeholder="Enter the mission description"
+                value={missionData.missionDetails?.missionDescription}
+                onChange={(e) => {
+                  setMissionData({
+                    ...missionData,
+                    missionDetails: {
+                      ...missionData.missionDetails,
+                      missionDescription: e.target.value,
+                    },
+                  });
+                }}
               />
             </div>
           </div>
@@ -136,7 +232,9 @@ const CreateMission: React.FC = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button className={styles.saveBtn}>Save</button>
+          <button className={styles.saveBtn} onClick={handleSave}>
+            Save
+          </button>
           <button className={styles.postBtn}>Post</button>
         </div>
       </div>
