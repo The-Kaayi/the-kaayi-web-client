@@ -7,7 +7,7 @@ import FileUpload from "@/components/FileUpload/FileUpload";
 import CustomSelect from "@/components/CustomSelect/CustomSelect";
 import ShortParagraph from "@/components/Questions/ShortParagraph/ShortParagraph";
 import LongParagraph from "@/components/Questions/LongParagraph/LongParagraph";
-import MultipleChoice from "@/components/Questions/MultilpleChoice/MultipleChoice";
+import MultipleChoice from "@/components/Questions/MultipleChoice/MultipleChoice";
 import MultipleSelect from "@/components/Questions/MultipleSelect/MultipleSelect";
 import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
