@@ -22,7 +22,6 @@ type missionType = {
   missionDetails: {
     missionName: string;
     missionDescription: string;
-    missionLogo: string;
   };
   questions: {
     id: number;
@@ -45,7 +44,6 @@ const CreateMission: React.FC = () => {
     missionDetails: {
       missionName: "",
       missionDescription: "",
-      missionLogo: "",
     },
     questions: [],
   });
@@ -99,7 +97,6 @@ const CreateMission: React.FC = () => {
       missionDetails: {
         missionName: "",
         missionDescription: "",
-        missionLogo: "",
       },
       questions: [],
     };
