@@ -5,8 +5,10 @@ import cardImage from "../../../../public/images/MissionCard/card-image.jpg";
 import editIcon from "../../../../public/images/MissionCard/edit.svg";
 import styles from "./MissionCard.module.scss";
 
-const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
+const MissionCard: React.FC<{ missionUUID: string, missionData: any }> = ({ missionUUID, missionData }) => {
   const status: string = "Active";
+
+  console.log(missionData.missionDetails)
   return (
     <div className={styles.missionCard}>
       <div className={styles.shopInfo}>
@@ -29,18 +31,16 @@ const MissionCard: React.FC<{ missionUUID: string }> = ({ missionUUID }) => {
             {status}
           </p>
         </div>
-        <p className={styles.shopTitle}>Shop Title</p>
-        <p className={styles.shopLocation}>Shop Location</p>
+        <p className={styles.shopTitle}>{missionData.shopDetails.shopName}</p>
+        <p className={styles.shopLocation}>{missionData.shopDetails.shopLocation}</p>
       </div>
 
       <div className={styles.missionInfo}>
         <Link href={`missions/${missionUUID}`} className={styles.missionTitle}>
-          Mission Title
+          {missionData.missionDetails.missionName}
         </Link>
         <p className={styles.missionDesc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+          {missionData.missionDetails.missionDescription}
         </p>
       </div>
     </div>

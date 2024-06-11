@@ -139,10 +139,11 @@ const CreateMission: React.FC = () => {
       questions: questions,
     };
 
-    // Ensure no undefined values
-    const validMission = JSON.parse(JSON.stringify(newMission, (key, value) =>
-      value === undefined ? null : value
-    ));
+    const validMission = JSON.parse(
+      JSON.stringify(newMission, (key, value) =>
+        value === undefined ? null : value
+      )
+    );
 
     setMissionData(newMission);
 
