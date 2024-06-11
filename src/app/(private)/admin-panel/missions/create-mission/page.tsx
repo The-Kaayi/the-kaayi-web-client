@@ -67,7 +67,6 @@ const CreateMission: React.FC = () => {
     );
   };
   const handleOptionsChange = (options: Option[] | undefined, id: number) => {
-    // Provide a default empty array if options is undefined
     const updatedOptions = options || [];
     setQuestions(
       questions.map((q) =>
@@ -120,7 +119,13 @@ const CreateMission: React.FC = () => {
         />
       );
     } else if (question.type === "MSQ") {
-      return <MultipleSelect />;
+      return (
+        <MultipleSelect
+          question={question}
+          onQuestionChange={handleQuestionChange}
+          onOptionsChange={handleOptionsChange}
+        />
+      );
     }
   };
 

@@ -1,28 +1,60 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./MultipleSelect.module.scss";
 
-const MultipleSelect: React.FC = () => {
-  const [question, setQuestion] = useState("");
-  const [answers, setAnswers] = useState([{ text: "", checked: false }]);
+type Option = {
+  id: number;
+  value: string;
+};
+
+type MultipleSelectProps = {
+  question: {
+    id: number;
+    question: string;
+    options: Option[];
+  };
+  onQuestionChange: (value: string, id: number) => void;
+  onOptionsChange: (options: Option[], id: number) => void;
+};
+
+const MultipleSelect: React.FC<MultipleSelectProps> = ({
+  question,
+  onQuestionChange,
+  onOptionsChange,
+}) => {
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (question.options.length === 0) {
+      onOptionsChange([{ id: 1, value: "" }], question.id);
+    }
+  }, [onOptionsChange, question.id, question.options.length]);
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(e.target.value);
+    onQuestionChange(e.target.value, question.id);
   };
 
-  const handleOptionChange = (index: number, value: string) => {
-    const newOptions = [...answers];
-    newOptions[index].text = value;
-    setAnswers(newOptions);
+  const handleAnswerChange = (id: number, value: string) => {
+    const newAnswers = question.options.map((option) =>
+      option.id === id ? { id, value } : option
+    );
+    onOptionsChange(newAnswers, question.id);
   };
 
-  const handleCheckboxChange = (index: number) => {
-    const newOptions = [...answers];
-    newOptions[index].checked = !newOptions[index].checked;
-    setAnswers(newOptions);
+  const handleAnswerSelect = (id: number) => {
+    const isSelected = selectedAnswers.includes(id);
+    if (isSelected) {
+      setSelectedAnswers(selectedAnswers.filter((answerId) => answerId !== id));
+    } else {
+      setSelectedAnswers([...selectedAnswers, id]);
+    }
   };
 
-  const addOption = () => {
-    setAnswers([...answers, { text: "", checked: false }]);
+  const addAnswer = () => {
+    const newId = question.options.length
+      ? question.options[question.options.length - 1].id + 1
+      : 1;
+    const newAnswers = [...question.options, { id: newId, value: "" }];
+    onOptionsChange(newAnswers, question.id);
   };
 
   return (
@@ -30,36 +62,36 @@ const MultipleSelect: React.FC = () => {
       <input
         className={styles.question}
         type="text"
-        value={question}
+        value={question.question}
         onChange={handleQuestionChange}
         placeholder="Question"
       />
       <div className={styles.answerBox}>
-        {answers.map((option, index) => (
-          <div key={index} className={styles.answerOption}>
+        {question.options.map((option) => (
+          <div key={option.id} className={styles.answerOption}>
             <input
               className={styles.answerSelect}
               type="checkbox"
-              id={`option-${index}`}
-              checked={option.checked}
-              onChange={() => handleCheckboxChange(index)}
+              id={`option-${option.id}`}
+              checked={selectedAnswers.includes(option.id)}
+              onChange={() => handleAnswerSelect(option.id)}
             />
             <label
-              htmlFor={`option-${index}`}
+              htmlFor={`option-${option.id}`}
               className={styles.customCheckbox}
             ></label>
             <input
               className={styles.answerText}
               type="text"
-              value={option.text}
-              onChange={(e) => handleOptionChange(index, e.target.value)}
-              placeholder={`Option ${index + 1}`}
+              value={option.value}
+              onChange={(e) => handleAnswerChange(option.id, e.target.value)}
+              placeholder={`Option ${option.id}`}
             />
           </div>
         ))}
       </div>
-      <button className={styles.addButton} onClick={addOption}>
-       + Add Option
+      <button className={styles.addButton} onClick={addAnswer}>
+        + Add Option
       </button>
     </div>
   );
