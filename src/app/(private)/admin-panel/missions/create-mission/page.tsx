@@ -13,6 +13,9 @@ import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "@/firebase/config";
+
 type Option = any;
 
 type Question = any;
@@ -66,6 +69,7 @@ const CreateMission: React.FC = () => {
       questions.map((q) => (q.id === id ? { ...q, question: value } : q))
     );
   };
+
   const handleOptionsChange = (options: Option[] | undefined, id: number) => {
     const updatedOptions = options || [];
     setQuestions(
@@ -129,15 +133,28 @@ const CreateMission: React.FC = () => {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const newMission = {
       ...missionData,
       questions: questions,
     };
 
+    // Ensure no undefined values
+    const validMission = JSON.parse(JSON.stringify(newMission, (key, value) =>
+      value === undefined ? null : value
+    ));
+
     setMissionData(newMission);
 
-    console.log("Mission Data: ", newMission);
+    console.log("Mission Data: ", validMission);
+
+    try {
+      await addDoc(collection(db, "missions"), validMission);
+      console.log("Mission added successfully!");
+      // Optionally, you can add a notification or redirect the user after successful save.
+    } catch (error) {
+      console.error("Error adding mission: ", error);
+    }
   };
 
   return (
