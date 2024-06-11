@@ -1,11 +1,21 @@
 import { useState } from "react";
 import styles from "./LongParagraph.module.scss";
 
-const LongParagraph: React.FC = () => {
-  const [question, setQuestion] = useState("");
+type LongParagraphProps = {
+  question: {
+    id: number;
+    question: string;
+  };
+  onQuestionChange: (value: string, id: number) => void;
+};
+
+const LongParagraph: React.FC<LongParagraphProps> = ({
+  question,
+  onQuestionChange,
+}) => {
 
   const questionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(e.target.value);
+    onQuestionChange(e.target.value, question.id);
   };
 
   return (
@@ -15,7 +25,7 @@ const LongParagraph: React.FC = () => {
         type="text"
         placeholder="Question"
         onChange={questionChange}
-        value={question}
+        value={question.question}
       />
       <div className={styles.answerBox}>
         <textarea

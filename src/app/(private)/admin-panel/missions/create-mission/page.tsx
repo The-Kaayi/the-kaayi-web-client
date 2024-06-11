@@ -35,7 +35,9 @@ type MissionType = {
 };
 
 const CreateMission: React.FC = () => {
-  const [questions, setQuestions] = useState<Question[]>([{ id: 1, type: "short", question: "" }]);
+  const [questions, setQuestions] = useState<Question[]>([
+    { id: 1, type: "short", question: "" },
+  ]);
   const [missionData, setMissionData] = useState<MissionType>({
     shopDetails: {
       shopName: "",
@@ -83,9 +85,19 @@ const CreateMission: React.FC = () => {
 
   const renderQuestionType = (question: Question) => {
     if (question.type === "short") {
-      return <ShortParagraph question={question} onQuestionChange={handleQuestionChange} />;
+      return (
+        <ShortParagraph
+          question={question}
+          onQuestionChange={handleQuestionChange}
+        />
+      );
     } else if (question.type === "long") {
-      return <LongParagraph />;
+      return (
+        <LongParagraph
+          question={question}
+          onQuestionChange={handleQuestionChange}
+        />
+      );
     } else if (question.type === "MCQ") {
       return <MultipleChoice />;
     } else if (question.type === "MSQ") {
