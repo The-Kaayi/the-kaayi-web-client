@@ -13,13 +13,9 @@ import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
-type Question = {
-  id: number;
-  type: string;
-  question: string;
-  answer?: string;
-  options?: string[];
-};
+type Option = any;
+
+type Question = any;
 
 type MissionType = {
   shopDetails: {
@@ -53,13 +49,30 @@ const CreateMission: React.FC = () => {
 
   const handleSelectChange = (value: string, id: number) => {
     setQuestions(
-      questions.map((q) => (q.id === id ? { ...q, type: value } : q))
+      questions.map((q) =>
+        q.id === id
+          ? {
+              ...q,
+              type: value,
+              options: value === "MCQ" || value === "MSQ" ? [] : q.options,
+            }
+          : q
+      )
     );
   };
 
   const handleQuestionChange = (value: string, id: number) => {
     setQuestions(
       questions.map((q) => (q.id === id ? { ...q, question: value } : q))
+    );
+  };
+  const handleOptionsChange = (options: Option[] | undefined, id: number) => {
+    // Provide a default empty array if options is undefined
+    const updatedOptions = options || [];
+    setQuestions(
+      questions.map((q) =>
+        q.id === id ? { ...q, options: updatedOptions } : q
+      )
     );
   };
 
@@ -99,7 +112,13 @@ const CreateMission: React.FC = () => {
         />
       );
     } else if (question.type === "MCQ") {
-      return <MultipleChoice />;
+      return (
+        <MultipleChoice
+          question={question}
+          onQuestionChange={handleQuestionChange}
+          onOptionsChange={handleOptionsChange}
+        />
+      );
     } else if (question.type === "MSQ") {
       return <MultipleSelect />;
     }

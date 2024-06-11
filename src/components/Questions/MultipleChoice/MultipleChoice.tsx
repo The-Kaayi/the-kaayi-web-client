@@ -1,27 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./MultipleChoice.module.scss";
 
-const MultipleChoice: React.FC = () => {
-  const [question, setQuestion] = useState("");
-  const [answers, setAnswers] = useState([""]);
+type Option = {
+  id: number;
+  value: string;
+};
+
+type MultipleChoiceProps = {
+  question: {
+    id: number;
+    question: string;
+    options: Option[];
+  };
+  onQuestionChange: (value: string, id: number) => void;
+  onOptionsChange: (options: Option[], id: number) => void;
+};
+
+const MultipleChoice: React.FC<MultipleChoiceProps> = ({
+  question,
+  onQuestionChange,
+  onOptionsChange,
+}) => {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
+  useEffect(() => {
+    if (question.options.length === 0) {
+      onOptionsChange([{ id: 1, value: "" }], question.id);
+    }
+  }, [onOptionsChange, question.id, question.options.length]);
+
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(e.target.value);
+    onQuestionChange(e.target.value, question.id);
   };
 
-  const handleAnswerChange = (index: number, value: string) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = value;
-    setAnswers(newAnswers);
+  const handleAnswerChange = (id: number, value: string) => {
+    const newAnswers = question.options.map((option) =>
+      option.id === id ? { id, value } : option
+    );
+    onOptionsChange(newAnswers, question.id);
   };
 
-  const handleAnswerSelect = (index: number) => {
-    setSelectedAnswer(index);
+  const handleAnswerSelect = (id: number) => {
+    setSelectedAnswer(id);
   };
 
   const addAnswer = () => {
-    setAnswers([...answers, ""]);
+    const newId = question.options.length
+      ? question.options[question.options.length - 1].id + 1
+      : 1;
+    const newAnswers = [...question.options, { id: newId, value: "" }];
+    onOptionsChange(newAnswers, question.id);
   };
 
   return (
@@ -29,31 +57,31 @@ const MultipleChoice: React.FC = () => {
       <input
         className={styles.question}
         type="text"
-        value={question}
+        value={question.question}
         onChange={handleQuestionChange}
         placeholder="Question"
       />
       <div className={styles.answerBox}>
-        {answers.map((answer, index) => (
-          <div key={index} className={styles.answerOption}>
+        {question.options.map((option) => (
+          <div key={option.id} className={styles.answerOption}>
             <input
               className={styles.answerSelect}
               type="radio"
-              name="multipleChoice"
-              id={`option-${index}`}
-              checked={selectedAnswer === index}
-              onChange={() => handleAnswerSelect(index)}
+              name={`multipleChoice-${question.id}`}
+              id={`option-${option.id}`}
+              checked={selectedAnswer === option.id}
+              onChange={() => handleAnswerSelect(option.id)}
             />
             <label
-              htmlFor={`option-${index}`}
+              htmlFor={`option-${option.id}`}
               className={styles.customCheckbox}
             ></label>
             <input
               className={styles.answerText}
               type="text"
-              value={answer}
-              onChange={(e) => handleAnswerChange(index, e.target.value)}
-              placeholder={`Option ${index + 1}`}
+              value={option.value}
+              onChange={(e) => handleAnswerChange(option.id, e.target.value)}
+              placeholder={`Option ${option.id}`}
             />
           </div>
         ))}
