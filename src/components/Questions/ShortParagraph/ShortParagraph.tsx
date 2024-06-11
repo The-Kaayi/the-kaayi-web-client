@@ -1,11 +1,20 @@
-import { useState } from "react";
+import React from "react";
 import styles from "./ShortParagraph.module.scss";
 
-const ShortParagraph: React.FC = () => {
-  const [question, setQuestion] = useState("");
+type ShortParagraphProps = {
+  question: {
+    id: number;
+    question: string;
+  };
+  onQuestionChange: (value: string, id: number) => void;
+};
 
+const ShortParagraph: React.FC<ShortParagraphProps> = ({
+  question,
+  onQuestionChange,
+}) => {
   const questionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(e.target.value);
+    onQuestionChange(e.target.value, question.id);
   };
 
   return (
@@ -14,7 +23,7 @@ const ShortParagraph: React.FC = () => {
         className={styles.question}
         type="text"
         placeholder="Question"
-        value={question}
+        value={question.question}
         onChange={questionChange}
       />
       <div className={styles.answerBox}>

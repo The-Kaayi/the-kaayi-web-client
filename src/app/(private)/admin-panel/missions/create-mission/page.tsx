@@ -13,7 +13,15 @@ import deleteIcon from "../../../../../../public/images/Missions/delete.svg";
 import arrowIcon from "../../../../../../public/images/Missions/arrow-right.svg";
 import styles from "./page.module.scss";
 
-type missionType = {
+type Question = {
+  id: number;
+  type: string;
+  question: string;
+  answer?: string;
+  options?: string[];
+};
+
+type MissionType = {
   shopDetails: {
     shopName: string;
     shopLocation: string;
@@ -23,19 +31,12 @@ type missionType = {
     missionName: string;
     missionDescription: string;
   };
-  questions: {
-    id: number;
-    type: string;
-    question: string;
-    answer?: string;
-    options?: string[];
-  }[];
+  questions: Question[];
 };
 
 const CreateMission: React.FC = () => {
-  const [questions, setQuestions] = useState([{ id: 1, type: "short" }]);
-  const [questionData, setQuestionData] = useState<missionType[]>([]);
-  const [missionData, setMissionData] = useState<missionType>({
+  const [questions, setQuestions] = useState<Question[]>([{ id: 1, type: "short", question: "" }]);
+  const [missionData, setMissionData] = useState<MissionType>({
     shopDetails: {
       shopName: "",
       shopLocation: "",
@@ -54,10 +55,17 @@ const CreateMission: React.FC = () => {
     );
   };
 
+  const handleQuestionChange = (value: string, id: number) => {
+    setQuestions(
+      questions.map((q) => (q.id === id ? { ...q, question: value } : q))
+    );
+  };
+
   const addQuestion = () => {
     const newQuestion = {
       id: questions.length + 1,
       type: "short",
+      question: "",
     };
     setQuestions([...questions, newQuestion]);
   };
@@ -73,37 +81,27 @@ const CreateMission: React.FC = () => {
     { value: "MSQ", label: "Multiple Select" },
   ];
 
-  const renderQuestionType = (type: string) => {
-    if (type === "short") {
-      return <ShortParagraph />;
-    } else if (type === "long") {
+  const renderQuestionType = (question: Question) => {
+    if (question.type === "short") {
+      return <ShortParagraph question={question} onQuestionChange={handleQuestionChange} />;
+    } else if (question.type === "long") {
       return <LongParagraph />;
-    } else if (type === "MCQ") {
+    } else if (question.type === "MCQ") {
       return <MultipleChoice />;
-    } else if (type === "MSQ") {
+    } else if (question.type === "MSQ") {
       return <MultipleSelect />;
     }
   };
 
   const handleSave = () => {
-    console.log("test", questions);
-
     const newMission = {
-      shopDetails: {
-        shopName: "",
-        shopLocation: "",
-        shopLogo: "",
-      },
-      missionDetails: {
-        missionName: "",
-        missionDescription: "",
-      },
-      questions: [],
+      ...missionData,
+      questions: questions,
     };
 
     setMissionData(newMission);
 
-    console.log("test 1", missionData);
+    console.log("Mission Data: ", newMission);
   };
 
   return (
@@ -207,14 +205,14 @@ const CreateMission: React.FC = () => {
         </div>
 
         <div className={styles.questionare}>
-          {questions.map((question: any, index: number) => (
+          {questions.map((question: Question) => (
             <div key={question.id} className={styles.question}>
               <CustomSelect
                 options={questionOptions}
                 defaultValue={question.type}
                 onChange={(value) => handleSelectChange(value, question.id)}
               />
-              {renderQuestionType(question.type)}
+              {renderQuestionType(question)}
               <Image
                 className={styles.deleteIcon}
                 onClick={() => removeQuestion(question.id)}
