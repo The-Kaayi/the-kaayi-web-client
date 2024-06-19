@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import MissionCard from "@/components/Missions/MissonCard/MissionCard";
+import CustomLoader from "@/components/CustomLoader/CustomLoader";
 import styles from "./page.module.scss";
 
 import { collection, getDocs } from "firebase/firestore";
@@ -57,7 +58,7 @@ const Missions: React.FC = () => {
       </div>
       <div className={styles.content}>
         {loading ? (
-          <p className={styles.loadingText}>Loading Missions...</p>
+          <CustomLoader />
         ) : missions.length > 0 ? (
           missions.map((mission) => (
             <MissionCard
