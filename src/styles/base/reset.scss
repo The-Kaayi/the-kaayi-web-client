@@ -14,7 +14,7 @@ body {
 }
 
 body {
-  color: $dark-font; 
+  color: $dark-font;
   background: $light-background;
 }
 
@@ -39,6 +39,13 @@ textarea {
   font-family: inherit;
   border: none;
   background: none;
+}
+
+.maintenancePage {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 //input autocomplete styles
