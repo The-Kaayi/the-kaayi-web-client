@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { APP_NAME } from "@/utils/constants";
 import AdminHeader from "@/components/AdminHeader/AdminHeader";
+import AdminSideBar from "@/components/AdminSideBar/AdminSideBar";
+import Maintenance from "@/components/Maintenance/Maintenance";
 import "@/styles/base/reset.scss";
 import styles from "./layout.module.scss";
-import AdminSideBar from "@/components/AdminSideBar/AdminSideBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,12 +23,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
+
+  if (isMaintenanceMode) {
+    return (
+      <html lang="en">
+        <body className={(poppins.className, "maintenancePage")}>
+          <Maintenance />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en">
       <body className={poppins.className}>
-          <AdminSideBar />
-          <AdminHeader />
-          <div className={styles.content}>{children}</div>
+        <AdminSideBar />
+        <AdminHeader />
+        <div className={styles.content}>{children}</div>
       </body>
     </html>
   );
