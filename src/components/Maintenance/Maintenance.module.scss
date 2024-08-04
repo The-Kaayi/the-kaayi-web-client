@@ -1,0 +1,40 @@
+@import "@/styles/abstracts/variables";
+
+.maintenance {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    width: 250px;
+    height: 250px;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      font-size: $font-size-12;
+      font-weight: bold;
+      line-height: normal;
+    }
+
+    .desc {
+      font-size: $font-size-4;
+      font-weight: 400;
+      line-height: 150%;
+      text-align: center;
+
+      .emailLink {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
+  }
+}
