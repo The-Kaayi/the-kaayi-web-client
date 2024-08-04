@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { APP_NAME } from "@/utils/constants";
+import Maintenance from "@/components/Maintenance/Maintenance";
 import "@/styles/base/reset.scss";
 
 const poppins = Poppins({
@@ -19,11 +20,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
+
+  if (isMaintenanceMode) {
+    return (
+      <html lang="en">
+        <body className={(poppins.className, "maintenancePage")}>
+          <Maintenance />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        {children}
-      </body>
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }

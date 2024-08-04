@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { APP_NAME } from "@/utils/constants";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import Maintenance from "@/components/Maintenance/Maintenance";
 import "@/styles/base/reset.scss";
 import "./globals.scss";
 
@@ -10,7 +11,6 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
 
 export const metadata: Metadata = {
   title: APP_NAME,
@@ -23,6 +23,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
+
+  if (isMaintenanceMode) {
+    return (
+      <html lang="en">
+        <body className={(poppins.className, "maintenancePage")}>
+          <Maintenance />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en">
       <body className={poppins.className}>
